@@ -648,7 +648,14 @@ void initLCD(void){
 	MinY1 = 100;
 	MinY2 = 67;
 }
-
+/*
+uint32_t* LCD_SetTime(void){
+	//FlashHour()
+	//DrawTime(newHr, newMin);
+	//uint32_t* ret;
+	return ret;
+}
+*/
 void DrawTime(uint32_t currentHr, uint32_t currentMin){
 	ST7735_Line(HrX1, HrY1, HrX2, HrY2, 0xFFFF);
 	ST7735_Line(MinX1, MinY1, MinX2, MinY2, 0xFFFF);
@@ -656,6 +663,7 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin){
 	ST7735_OutUDec(currentHr);
 	ST7735_OutString(":");
 	ST7735_OutUDec(currentMin);
+	
 	switch(currentHr){
 		case 0:
 			HrX2 = 64;// + xOffset;
@@ -706,12 +714,13 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin){
 			HrY2 = 93;// - yOffset;
 			break;
 		case 11: 
-			HrX2 = 21;// + xOffset;
+			HrX2 = 50;// + xOffset;
 			HrY2 = 89;// - yOffset;
 			break;
 			
 			
 	}
+	
 	ST7735_Line(HrX1, HrY1, HrX2, HrY2, 0x0000);
 	
 	switch(currentMin){
@@ -764,125 +773,207 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin){
 			MinY2 = 85;// + yOffset;
 			break;
 		case 11:
+			MinX2 = 92;// + xOffset;
+			MinY2 = 87;// + yOffset;
 			break;
 		case 12:
+			MinX2 = 94;// + xOffset;
+			MinY2 = 90;// + yOffset;
 			break;
 		case 13:
+			MinX2 = 96;// + xOffset;
+			MinY2 = 94;// + yOffset;
 			break;
 		case 14:
+			MinX2 = 98;// + xOffset;
+			MinY2 = 97;// + yOffset;
 			break;
 		case 15:
 			MinX2 = 100;// + xOffset;
 			MinY2 = 100;// + yOffset;
 			break;
 		case 16:
+			MinX2 = 98;// + xOffset;
+			MinY2 = 103;// + yOffset;
 			break;
 		case 17:
+			MinX2 = 96;// + xOffset;
+			MinY2 = 106;// + yOffset;
 			break;
 		case 18:
+			MinX2 = 94;// + xOffset;
+			MinY2 = 108;// + yOffset;
 			break;
 		case 19:
+			MinX2 = 92;// + xOffset;
+			MinY2 = 110;// + yOffset;
 			break;
 		case 20:
 			MinX2 = 90;// - xOffset;
 			MinY2 = 113;// + yOffset;
 			break;
 		case 21:
+			MinX2 = 88;// - xOffset;
+			MinY2 = 115;// + yOffset;
 			break;
 		case 22:
+			MinX2 = 85;// - xOffset;
+			MinY2 = 117;// + yOffset;
 			break;
 		case 23:
+			MinX2 = 83;// - xOffset;
+			MinY2 = 119;// + yOffset;
 			break;
 		case 24:
+			MinX2 = 80;// - xOffset;
+			MinY2 = 121;// + yOffset;
 			break;
 		case 25: 
 			MinX2 = 78;// - xOffset;
 			MinY2 = 122;// + yOffset;
 			break;
 		case 26:
+			MinX2 = 75;// - xOffset;
+			MinY2 = 124;// + yOffset;
 			break;
 		case 27:
+			MinX2 = 73;// - xOffset;
+			MinY2 = 126;// + yOffset;
 			break;
 		case 28:
+			MinX2 = 70;// - xOffset;
+			MinY2 = 128;// + yOffset;
 			break;
 		case 29:
+			MinX2 = 67;// - xOffset;
+			MinY2 = 130;// + yOffset;
 			break;
 		case 30:
 			MinX2 = 64;// - xOffset;
 			MinY2 = 133;// - yOffset;
 			break;
 		case 31:
+			MinX2 = 62;// - xOffset;
+			MinY2 = 130;// - yOffset;
 			break;
 		case 32:
+			MinX2 = 60;// - xOffset;
+			MinY2 = 128;// - yOffset;
 			break;
 		case 33:
+			MinX2 = 57;// - xOffset;
+			MinY2 = 126;// - yOffset;
 			break;
 		case 34:
+			MinX2 = 54;// - xOffset;
+			MinY2 = 124;// - yOffset;
 			break;
 		case 35:
 			MinX2 = 50;// - xOffset;
 			MinY2 = 122;// - yOffset;
 			break;
 		case 36:
+			MinX2 = 47;// - xOffset;
+			MinY2 = 122;// - yOffset;
 			break;
 		case 37:
+			MinX2 = 44;// - xOffset;
+			MinY2 = 122;// - yOffset;
 			break;
 		case 38:
+			MinX2 = 41;// - xOffset;
+			MinY2 = 122;// - yOffset;
 			break;
 		case 39:
+			MinX2 = 38;// - xOffset;
+			MinY2 = 122;// - yOffset;
 			break;
 		case 40:
 			MinX2 = 35;// - xOffset;
 			MinY2 = 113;// - yOffset;
 			break;
 		case 41:
+			MinX2 = 34;// - xOffset;
+			MinY2 = 110;// - yOffset;
 			break;
 		case 42:
+			MinX2 = 33;// - xOffset;
+			MinY2 = 108;// - yOffset;
 			break;
 		case 43:
+			MinX2 = 32;// - xOffset;
+			MinY2 = 105;// - yOffset;
 			break;
 		case 44:
+			MinX2 = 31;// - xOffset;
+			MinY2 = 103;// - yOffset;
 			break;
 		case 45:
 			MinX2 = 30;// + xOffset;
 			MinY2 = 100;// - yOffset;
 			break;
 		case 46:
+			MinX2 = 31;// + xOffset;
+			MinY2 = 98;// - yOffset;
 			break;
 		case 47:
+			MinX2 = 32;// + xOffset;
+			MinY2 = 97;// - yOffset;
 			break;
 		case 48:
+			MinX2 = 33;// + xOffset;
+			MinY2 = 95;// - yOffset;
 			break;
 		case 49:
+			MinX2 = 34;// + xOffset;
+			MinY2 = 94;// - yOffset;
 			break;
 		case 50:
 			MinX2 = 35;// + xOffset;
 			MinY2 = 93;// - yOffset;
 			break;
 		case 51:
+			MinX2 = 38;// + xOffset;
+			MinY2 = 92;// - yOffset;
 			break;
 		case 52:
+			MinX2 = 41;// + xOffset;
+			MinY2 = 91;// - yOffset;
 			break;
 		case 53:
+			MinX2 = 44;// + xOffset;
+			MinY2 = 90;// - yOffset;
 			break;
 		case 54:
-			break;
-		case 55: 
-			MinX2 = 21;// + xOffset;
+			MinX2 = 47;// + xOffset;
 			MinY2 = 89;// - yOffset;
 			break;
+		case 55: 
+			MinX2 = 50;// + xOffset;
+			MinY2 = 88;// - yOffset;
+			break;
 		case 56:
+			MinX2 = 53;// + xOffset;
+			MinY2 = 83;// - yOffset;
 			break;
 		case 57:
+			MinX2 = 56;// + xOffset;
+			MinY2 = 78;// - yOffset;
 			break;
 		case 58:
+			MinX2 = 59;// + xOffset;
+			MinY2 = 74;// - yOffset;
 			break;
 		case 59:
+			MinX2 = 61;// + xOffset;
+			MinY2 = 70;// - yOffset;
 			break;
 			
 			
 	}
+	
 	ST7735_Line(MinX1, MinY1, MinX2, MinY2, 0x0000);
 	
 
 }
+
