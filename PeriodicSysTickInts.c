@@ -451,7 +451,8 @@ const uint16_t Logo[] = {
 
 
 
-
+#define PB0 (*((volatile uint32_t *)0x40005004))
+#define CAL 25   // cycles to service interrupt
 int main(void){
 	//This is for the Systick Intitialization
   PLL_Init(Bus80MHz);         // bus clock at 80 MHz
@@ -463,6 +464,11 @@ int main(void){
                               // configure PF2 as GPIO
   GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0xFFFF00FF)+0x00000000;
   GPIO_PORTF_AMSEL_R = 0;     // disable analog functionality on PF,PF3
+	
+	GPIO_PORTB_DIR_R |= 0x01;   // make PB0 output 
+  GPIO_PORTB_AFSEL_R &= ~0x01;// disable alt funct on PB0
+  GPIO_PORTB_DEN_R |= 0x01;   // enable digital I/O on PB0
+	
   SysTick_Init(8000000);        // initialize SysTick timer
   EnableInterrupts();
 //This is for the Display init
@@ -483,12 +489,16 @@ void SysTick_Handler(void){
   PF2 ^= 0x04;                // toggle PF2
   PF2 ^= 0x04;                // toggle PF2
   Counts = Counts + 1;
+	PB0 ^= 0x01;
+//	if(Counts == 2){
+//		PB0 
+//		Counts = 0;
+//	}
   PF2 ^= 0x04;                // toggle PF2
 }
 
 uint8_t Duty; // 1 to 99
-#define PB0 (*((volatile uint32_t *)0x40005004))
-#define CAL 25   // cycles to service interrupt
+
 void Init2(void){
   NVIC_ST_RELOAD_R = 16000*Duty-CAL;   // reload value for high
   NVIC_ST_CTRL_R = 7;               // activate and enable interrupts
