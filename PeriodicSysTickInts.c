@@ -52,6 +52,7 @@ volatile uint16_t Am = 1;
 volatile uint32_t AlarmHour = 12;
 volatile uint32_t	AlarmMinute = 0;
 volatile char*	AlarmAmPm = "AM";
+volatile uint16_t AlarmAm = 1;
 volatile uint16_t AlarmSet = 0;
 int main(void){
 	//This is for the Systick Intitialization
@@ -75,29 +76,61 @@ int main(void){
   }
 }
 
-void setHour(uint32_t Hr){
-	Hours = Hr;
+void incHour(){
+	Hours++;
+	if( Hours >= 13){
+		Hours = 1;
+	}
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
-void setMinute(uint32_t Minute){
-	Minutes = Minute;
+void incMinute(){
+	Minutes++;
+	if(Minutes >= 60){
+		Minutes = 0;
+		Hours++;
+		if( Hours >= 13){
+			Hours = 1;
+		}
+	}
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
-void setAmPm(char* AMPM){
-	AmPm = AMPM;
+void toggleAmPm(){
+	if(Am == 1){
+				AmPm = "PM";
+				Am = 0;
+			}else {
+				AmPm = "AM";
+				Am = 1;
+			}
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 
-void setAlarmHour(uint32_t Hr){
-	AlarmHour = Hr;
+void incAlarmHour(){
+	AlarmHour++;
+	if( AlarmHour >= 13){
+		AlarmHour = 1;
+	}
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
-void setAlarmMinute(uint32_t Minute){
-	AlarmMinute = Minute;
+void incAlarmMinute(){
+	AlarmMinute++;
+	if(AlarmMinute >= 60){
+		AlarmMinute = 0;
+		AlarmHour++;
+		if( AlarmHour >= 13){
+			AlarmHour = 1;
+		}
+	}
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
-void setAlarmAmPm(char* AMPM){
-	AlarmAmPm = AMPM;
+void toggleAlarmAmPm(){
+	if(AlarmAm == 1){
+				AlarmAmPm = "PM";
+				AlarmAm = 0;
+			}else {
+				AlarmAmPm = "AM";
+				AlarmAm = 1;
+			}
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 
