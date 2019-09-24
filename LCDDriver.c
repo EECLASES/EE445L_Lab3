@@ -658,15 +658,27 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin, char* AmPm, uint32_t alar
 	ST7735_Line(MinX1, MinY1, MinX2, MinY2, 0xFFFF);
 	ST7735_SetCursor(0,0);
 	ST7735_SetTextColor(ST7735_YELLOW);
+	if(currentHr < 10){
+		ST7735_OutString(" ");
+	}
 	ST7735_OutUDec(currentHr);
 	ST7735_OutString(":");
+	if(currentMin < 10){
+		ST7735_OutUDec(0);
+	}
 	ST7735_OutUDec(currentMin);
 	ST7735_OutString(AmPm);
 	if(alarmSet == 1){
-		ST7735_OutString("        ");
+		ST7735_OutString("      ");
 		ST7735_SetTextColor(ST7735_BLUE);
+		if(alarmHr < 10){
+			ST7735_OutString(" ");
+		}
 		ST7735_OutUDec(alarmHr);
 		ST7735_OutString(":");
+		if(alarmMin < 10){
+			ST7735_OutUDec(0);
+		}
 		ST7735_OutUDec(alarmMin);
 		ST7735_OutString(alarmAmPm);
 	}
