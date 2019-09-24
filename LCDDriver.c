@@ -640,7 +640,7 @@ void initLCD(void){
 //This is for the Display init
 	ST7735_InitR(INITR_REDTAB);
 	setting = 0;
-	ST7735_PlotClear(0,4095);  // range from 0 to 4095
+	ST7735_FillScreen(0x0000);
 	ST7735_DrawBitmap(14,150, watchface, 100, 100);
 	HrX1 = 64;
 	HrX2 = 64;
