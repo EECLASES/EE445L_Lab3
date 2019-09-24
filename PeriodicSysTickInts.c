@@ -30,30 +30,33 @@
 #include "../inc/PLL.h"
 #include "../inc/ST7735.c"
 #include "../inc/ST7735.h"
-#include "LCDDriver.c"
-#include "SoundDriver.c"
-#include "SwitchDriver.c"
+#include "../inc/LCDDriver.c"
+#include "../inc/SoundDriver.c"
+#include "../inc/SwitchDriver.c"
 
 
 
 #define PF2     (*((volatile uint32_t *)0x40025010))
 #define PF3     (*((volatile uint32_t *)0x40025020))
+#define SETHOUR 1
+#define SETMINUTE 2
+#define SETAMPM 3
+#define SETMILITARY 4
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 long StartCritical (void);    // previous I bit, disable interrupts
 void EndCritical(long sr);    // restore I bit to previous value
 void WaitForInterrupt(void);  // low power mode
 volatile uint32_t Counts = 0;
-
-
-
-
-
-
 volatile uint32_t Hours = 0;
 volatile uint32_t Minutes = 0;
 volatile uint32_t Seconds = 0;
-
+volatile char* AmPm = "AM";
+volatile uint16_t Am = 1;
+volatile uint32_t AlarmHour;
+volatile uint32_t	AlarmMinute;
+volatile char*	AlarmAmPm;
+volatile uint16_t AlarmSet = 0;
 int main(void){
 	//This is for the Systick Intitialization
   PLL_Init(Bus80MHz);         // bus clock at 80 MHz
@@ -69,11 +72,28 @@ int main(void){
   EnableInterrupts();
 
 	initLCD();
-	DrawTime(0, 0);
+	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 	
   while(1){                   // interrupts every 1ms, 500 Hz flash
     //PF3 ^= 0x08;              // toggle PF3
   }
+}
+
+void setTime(uint32_t Hr, uint32_t Minute, char* AMPM){
+	Hours = Hr;
+	Minutes = Minute;
+	AmPm = AMPM;
+}
+
+void setAlarm(uint32_t Hr, uint32_t Minute, char* AMPM){
+	AlarmHour = Hr;
+	AlarmMinute = Minute;
+	AlarmAmPm = AMPM;
+	AlarmSet = 1;
+}
+
+void disableAlarm(void){
+	AlarmSet = 0;
 }
 
 // Interrupt service routine
@@ -82,43 +102,6 @@ void SysTick_Handler(void){
   //PF2 ^= 0x04;                // toggle PF2
   //PF2 ^= 0x04;                // toggle PF2
   Counts = Counts + 1;
-
-  PF2 ^= 0x04;                // toggle PF2
-
-
-//uint8_t Duty; // 1 to 99
-//#define PB0 (*((volatile uint32_t *)0x40005004))
-//#define CAL 25   // cycles to service interrupt
-//void Init2(void){
-//  NVIC_ST_RELOAD_R = 16000*Duty-CAL;   // reload value for high
-//  NVIC_ST_CTRL_R = 7;               // activate and enable interrupts
-//  PB0 = 0x01;
-//  EnableInterrupts();         // I = 0
-//}
-//void SysTick_Handler2(void){
-//  if(PB0){        // end of high pulse
-//    PB0 = 0x00;   // make it low
-//    NVIC_ST_RELOAD_R = 16000*(100-Duty)-CAL; // reload value for low
-//  }else{          // end of low pulse
-//    PB0 = 0x01;   // now high
-//    NVIC_ST_RELOAD_R = 16000*Duty-CAL;       // reload value for high
-//  }
-//}
-//int main2(void){
-//  PLL_Init(Bus16MHz);         // bus clock at 16 MHz
-//  SYSCTL_RCGCGPIO_R |= 0x02;  // activate port B
-//  Duty=25;
-//  Init2();
-//  GPIO_PORTB_DIR_R |= 0x01;   // make PB0 output 
-//  GPIO_PORTB_AFSEL_R &= ~0x01;// disable alt funct on PB0
-//  GPIO_PORTB_DEN_R |= 0x01;   // enable digital I/O on PB0
-//  while(1);
-//}
-
-
-
-
-
   //PF2 ^= 0x04;                // toggle PF2
 	if( Counts >= 10){
 		Counts = 0;
@@ -128,19 +111,25 @@ void SysTick_Handler(void){
 		Seconds = 0;
 		Minutes++;
 		if(Minutes < 60){
-			DrawTime(Hours, Minutes);
+			DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 		}
 	}
-	if( Minutes >= 60){
+	if(Minutes >= 60){
 		Minutes = 0;
 		Hours++;
-		DrawTime(Hours, Minutes);
+		DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 	}
 	if( Hours >= 12){
 		Hours = 0;
+		if(Am == 1){
+			AmPm = "PM";
+			Am = 0;
+		}else {
+			AmPm = "AM";
+			Am = 1;
+		}
 	}
 }
-
 
 
 
