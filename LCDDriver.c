@@ -3,6 +3,9 @@
 #include "../inc/tm4c123gh6pm.h"
 
 volatile uint32_t HrX1, HrX2, HrY1, HrY2, MinX1, MinX2, MinY1, MinY2;
+volatile uint16_t setting;
+
+
 const uint16_t watchface[] = {
  0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
  0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
@@ -636,7 +639,7 @@ const uint16_t watchface[] = {
 void initLCD(void){
 //This is for the Display init
 	ST7735_InitR(INITR_REDTAB);
-	
+	setting = 0;
 	ST7735_PlotClear(0,4095);  // range from 0 to 4095
 	ST7735_DrawBitmap(14,150, watchface, 100, 100);
 	HrX1 = 64;
@@ -647,22 +650,26 @@ void initLCD(void){
 	MinX2 = 64;
 	MinY1 = 100;
 	MinY2 = 67;
+	
 }
-/*
-uint32_t* LCD_SetTime(void){
-	//FlashHour()
-	//DrawTime(newHr, newMin);
-	//uint32_t* ret;
-	return ret;
-}
-*/
-void DrawTime(uint32_t currentHr, uint32_t currentMin){
+
+void DrawTime(uint32_t currentHr, uint32_t currentMin, char* AmPm, uint32_t alarmSet, uint32_t alarmHr, uint32_t alarmMin, char* alarmAmPm){
 	ST7735_Line(HrX1, HrY1, HrX2, HrY2, 0xFFFF);
 	ST7735_Line(MinX1, MinY1, MinX2, MinY2, 0xFFFF);
 	ST7735_SetCursor(0,0);
+	ST7735_SetTextColor(ST7735_YELLOW);
 	ST7735_OutUDec(currentHr);
 	ST7735_OutString(":");
 	ST7735_OutUDec(currentMin);
+	ST7735_OutString(AmPm);
+	if(alarmSet == 1){
+		ST7735_SetCursor(75, 0);
+		ST7735_SetTextColor(ST7735_BLUE);
+		ST7735_OutUDec(alarmHr);
+		ST7735_OutString(":");
+		ST7735_OutUDec(alarmMin);
+		ST7735_OutString(alarmAmPm);
+	}
 	
 	switch(currentHr){
 		case 0:
