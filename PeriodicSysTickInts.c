@@ -53,10 +53,10 @@ volatile uint32_t Minutes = 0;
 volatile uint32_t Seconds = 0;
 volatile char* AmPm = "AM";
 volatile uint16_t Am = 1;
-volatile uint32_t AlarmHour;
-volatile uint32_t	AlarmMinute;
-volatile char*	AlarmAmPm;
-volatile uint16_t AlarmSet = 0;
+volatile uint32_t AlarmHour = 0;
+volatile uint32_t	AlarmMinute = 0;
+volatile char*	AlarmAmPm = "AM";
+volatile uint16_t AlarmSet = 1;
 int main(void){
 	//This is for the Systick Intitialization
   PLL_Init(Bus80MHz);         // bus clock at 80 MHz
@@ -79,19 +79,30 @@ int main(void){
   }
 }
 
-void setTime(uint32_t Hr, uint32_t Minute, char* AMPM){
+void setHour(uint32_t Hr){
 	Hours = Hr;
+}
+void setMinute(uint32_t Minute){
 	Minutes = Minute;
+}
+void setAmPm(char* AMPM){
 	AmPm = AMPM;
 }
 
-void setAlarm(uint32_t Hr, uint32_t Minute, char* AMPM){
+void setAlarmHour(uint32_t Hr){
 	AlarmHour = Hr;
+}
+void setAlarmMinute(uint32_t Minute){
 	AlarmMinute = Minute;
+}
+void setAlarmAmPm(char* AMPM){
 	AlarmAmPm = AMPM;
 	AlarmSet = 1;
 }
 
+void enableAlarm(void){
+	AlarmSet = 1;
+}
 void disableAlarm(void){
 	AlarmSet = 0;
 }
