@@ -663,7 +663,7 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin, char* AmPm, uint32_t alar
 	ST7735_OutUDec(currentMin);
 	ST7735_OutString(AmPm);
 	if(alarmSet == 1){
-		ST7735_SetCursor(75, 0);
+		ST7735_OutString("        ");
 		ST7735_SetTextColor(ST7735_BLUE);
 		ST7735_OutUDec(alarmHr);
 		ST7735_OutString(":");
