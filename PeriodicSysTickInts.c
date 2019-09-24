@@ -38,25 +38,21 @@
 
 #define PF2     (*((volatile uint32_t *)0x40025010))
 #define PF3     (*((volatile uint32_t *)0x40025020))
-#define SETHOUR 1
-#define SETMINUTE 2
-#define SETAMPM 3
-#define SETMILITARY 4
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 long StartCritical (void);    // previous I bit, disable interrupts
 void EndCritical(long sr);    // restore I bit to previous value
 void WaitForInterrupt(void);  // low power mode
 volatile uint32_t Counts = 0;
-volatile uint32_t Hours = 0;
+volatile uint32_t Hours = 12;
 volatile uint32_t Minutes = 0;
 volatile uint32_t Seconds = 0;
 volatile char* AmPm = "AM";
 volatile uint16_t Am = 1;
-volatile uint32_t AlarmHour = 0;
+volatile uint32_t AlarmHour = 12;
 volatile uint32_t	AlarmMinute = 0;
 volatile char*	AlarmAmPm = "AM";
-volatile uint16_t AlarmSet = 1;
+volatile uint16_t AlarmSet = 0;
 int main(void){
 	//This is for the Systick Intitialization
   PLL_Init(Bus80MHz);         // bus clock at 80 MHz
@@ -130,8 +126,7 @@ void SysTick_Handler(void){
 		Hours++;
 		DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 	}
-	if( Hours >= 12){
-		Hours = 0;
+	if (Hours == 12){
 		if(Am == 1){
 			AmPm = "PM";
 			Am = 0;
@@ -139,6 +134,9 @@ void SysTick_Handler(void){
 			AmPm = "AM";
 			Am = 1;
 		}
+	}
+	if( Hours >= 13){
+		Hours = 1;
 	}
 }
 
