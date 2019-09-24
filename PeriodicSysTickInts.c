@@ -77,23 +77,28 @@ int main(void){
 
 void setHour(uint32_t Hr){
 	Hours = Hr;
+	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 void setMinute(uint32_t Minute){
 	Minutes = Minute;
+	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 void setAmPm(char* AMPM){
 	AmPm = AMPM;
+	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 
 void setAlarmHour(uint32_t Hr){
 	AlarmHour = Hr;
+	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 void setAlarmMinute(uint32_t Minute){
 	AlarmMinute = Minute;
+	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 void setAlarmAmPm(char* AMPM){
 	AlarmAmPm = AMPM;
-	AlarmSet = 1;
+	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 
 void enableAlarm(void){
@@ -124,16 +129,16 @@ void SysTick_Handler(void){
 	if(Minutes >= 60){
 		Minutes = 0;
 		Hours++;
-		DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
-	}
-	if (Hours == 12){
-		if(Am == 1){
-			AmPm = "PM";
-			Am = 0;
-		}else {
-			AmPm = "AM";
-			Am = 1;
+		if(Hours == 12){
+			if(Am == 1){
+				AmPm = "PM";
+				Am = 0;
+			}else {
+				AmPm = "AM";
+				Am = 1;
+			}
 		}
+		DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 	}
 	if( Hours >= 13){
 		Hours = 1;
