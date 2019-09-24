@@ -134,12 +134,14 @@ void toggleAlarmAmPm(){
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 }
 
-void enableAlarm(void){
-	AlarmSet = 1;
+void toggleAlarm(void){
+	if(AlarmSet == 0){
+		AlarmSet = 1;
+	}else {
+		AlarmSet = 0;
+	}
 }
-void disableAlarm(void){
-	AlarmSet = 0;
-}
+
 
 // Interrupt service routine
 // Executed every 12.5ns*(period)
