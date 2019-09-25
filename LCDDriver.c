@@ -995,4 +995,3 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin, char* AmPm, uint32_t alar
 	
 
 }
-

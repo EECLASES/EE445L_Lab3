@@ -7,7 +7,7 @@
 .\periodicsystickints.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\periodicsystickints.o: ../inc/ST7735.h
 .\periodicsystickints.o: LCDDriver.c
-.\periodicsystickints.o: SoundDriver.c
 .\periodicsystickints.o: SwitchDriver.c
-.\periodicsystickints.o: ../inc/Switch.c
-.\periodicsystickints.o: ../inc/Switch.h
+.\periodicsystickints.o: SoundDriver.c
+.\periodicsystickints.o: ../inc/Timer2A.h
+.\periodicsystickints.o: ../inc/Timer2A.c

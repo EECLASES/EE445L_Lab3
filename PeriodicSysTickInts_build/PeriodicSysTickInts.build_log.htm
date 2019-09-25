@@ -37,10 +37,12 @@ ST7735.c(1572): warning:  #223-D: function "abs" declared implicitly
     d = 2*abs(dx) - dy;
 ST7735.c(1610): warning:  #223-D: function "abs" declared implicitly
     if(abs(y2 - y1) < abs(x2 - x1)){ // if dx is greater than dy
-PeriodicSysTickInts.c: 3 warnings, 0 errors
+PeriodicSysTickInts.c(182): warning:  #177-D: variable "status"  was declared but never referenced
+  	uint32_t status;
+PeriodicSysTickInts.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=7034 RO-data=22150 RW-data=140 ZI-data=1132  
-".\PeriodicSysTickInts_build\PeriodicSysTickInts.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=7390 RO-data=22150 RW-data=184 ZI-data=1136  
+".\PeriodicSysTickInts_build\PeriodicSysTickInts.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -63,7 +65,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.2
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

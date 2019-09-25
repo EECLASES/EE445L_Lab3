@@ -32,8 +32,7 @@
 #include "../inc/ST7735.h"
 #include "LCDDriver.c"
 #include "SwitchDriver.c"
-
-//#include "SoundDriver.c"
+#include "SoundDriver.c"
 //#include "SwitchDriver.c"
 
 #define PB0 (*((volatile uint32_t *)0x40005004))
@@ -84,6 +83,7 @@ void Rise(void){
 void Fall(void){
   PF2 ^= 0x04;
   FallCount++;
+	playAlarm();
 }
 void incHour(){
 	Hours++;
@@ -153,89 +153,63 @@ void toggleAlarm(void){
 
 }
 
+void GPIOPortC_Handler(void){
+	if(GPIO_PORTC_RIS_R&0X10){
+	GPIO_PORTC_ICR_R = 0x10; //acknowledge flag 4
+	}
+	if(GPIO_PORTC_RIS_R&0X20){
+	GPIO_PORTC_ICR_R = 0x20; //acknowledge flag 4
+	}
+	if(GPIO_PORTC_RIS_R&0X40){
+	GPIO_PORTC_ICR_R = 0x40; //acknowledge flag 4
+	}
+	if(GPIO_PORTC_RIS_R&0X80){
+	GPIO_PORTC_ICR_R = 0x80; //acknowledge flag 4
+	}
+	PF2 ^= 0x04;
+}
+void GPIOPortE_Handler(void){
+	if(GPIO_PORTE_RIS_R&0X10){
+	GPIO_PORTE_ICR_R = 0x10; //acknowledge flag 4
+	}
+	if(GPIO_PORTE_RIS_R&0X20){
+	GPIO_PORTE_ICR_R = 0x20; //acknowledge flag 4
+	}
+	PF2 ^= 0x04;
+}
 
 int main(void){
-	uint32_t status;
 	//This is for the Systick Intitialization
   PLL_Init(Bus80MHz);         // bus clock at 80 MHz
   SYSCTL_RCGCGPIO_R |= 0x22;  // activate port F and B
   while((SYSCTL_PRGPIO_R & 0x00000020) == 0){};
 
 	Counts = 0;
-		Switch_Init();
-		Switch_Init3();
-	  Board_Init();             // initialize PF0 and PF4 and make them inputs
+		Switch_Init(&Fall,&Rise);     // initialize GPIO Port F interrupt
+		EdgeCounter_Init();
+		//Switch_Init();
+		//Switch_Init3();
+	  //Board_Init();  
+		// initialize PF0 and PF4 and make them inputs
+  GPIO_PORTF_DIR_R |= 0x0E;   // make PF2,PF3,PF1 output (PF2,PF3 built-in LED)
+  GPIO_PORTF_AFSEL_R &= ~0x0C;// disable alt funct on PF2,PF3 WONT BE DOING THAT
+  GPIO_PORTF_DEN_R |= 0x0E;   // enable digital I/O on PF2,PF3
+                              // configure PF2 as GPIO
+	GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0xFFFF00FF)+0x00000000;
+	GPIO_PORTF_AMSEL_R = 0;     // disable analog functionality on PF,PF3
+	
 
-//  GPIO_PORTF_DIR_R |= 0x0E;   // make PF2,PF3,PF1 output (PF2,PF3 built-in LED)
-//  //GPIO_PORTF_AFSEL_R &= ~0x0C;// disable alt funct on PF2,PF3 WONT BE DOING THAT
-//  GPIO_PORTF_DEN_R |= 0x0E;   // enable digital I/O on PF2,PF3
-//                              // configure PF2 as GPIO
-  //GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0xFFFF00FF)+0x00000000;
-  //GPIO_PORTF_AMSEL_R = 0;     // disable analog functionality on PF,PF3
-	
-	//THIS IS FOR THE SWITCH
-  //Switch_Init(&Fall,&Rise);     // initialize GPIO Port F interrupt
-		
-	//THIS IS FOR EXTERNAL SWITCH
-		
-		                          // make PF3-1 out (PF3-1 built-in LEDs)
-  GPIO_PORTF_DIR_R |= (RED|BLUE|GREEN);
-                              // disable alt funct on PF3-1
-  GPIO_PORTF_AFSEL_R &= ~(RED|BLUE|GREEN);
-                              // enable digital I/O on PF3-1
-  GPIO_PORTF_DEN_R |= (RED|BLUE|GREEN);
-                              // configure PF3-1 as GPIO
-  GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0xFFFF000F)+0x00000000;
-  GPIO_PORTF_AMSEL_R = 0;     // disable analog functionality on PF
-		
-	//Port B initialization
-//  GPIO_PORTB_DIR_R |= 0x01;   // make PB0 output 
-//  GPIO_PORTB_AFSEL_R &= ~0x01;// disable alt funct on PB0
-//  GPIO_PORTB_DEN_R |= 0x01;   // enable digital I/O on PB0
-	
 	
   SysTick_Init(80000);        // initialize SysTick timer
+	//Sound_Init();
   EnableInterrupts();
 
 	initLCD();
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 	
   while(1){                   // interrupts every 1ms, 500 Hz flash
-    //PF3 ^= 0x08;              // toggle PF3
-		//Switch_WaitPress();
-    //Switch_WaitRelease();
-		//status = Board_Input();
-		//status = Switch_Input();
-		status = Board_Input();
-    switch(status){                    // switches are negative logic on PF0 and PF4
-      case 0x01: toggleAlarm(); break;   // SW1 pressed
-      case 0x10: LEDS = RED; break;    // SW2 pressed
-      case 0x00: LEDS = GREEN; break;  // both switches pressed
-      case 0x11: LEDS = 0; break;      // neither switch pressed
-      default: LEDS = (RED|GREEN|BLUE);// unexpected return value
-    }
-		status = Switch_Input3();
-    switch(status){                    // switches are negative logic on PF0 and PF4
-			case 0x00: LEDS = (RED|GREEN); break;
-      case 0x02: LEDS = RED; break;   // SW1 pressed
-      case 0x04: LEDS = RED; break;    // SW2 pressed
-      case 0x08: LEDS = GREEN; break;  // both switches pressed
-      case 0x0A: LEDS = BLUE; break;      // neither switch pressed
-			case 0x0C: LEDS = BLUE; break;   // SW1 pressed
-      case 0x0E: LEDS = RED; break;    // SW2 pressed
-      case 0x10: LEDS = GREEN; break;  // both switches pressed
-      case 0x12: LEDS = BLUE; break;      // neither switch pressed
-			case 0x14: LEDS = BLUE; break;   // SW1 pressed
-      case 0x16: LEDS = RED; break;    // SW2 pressed
-      case 0x18: LEDS = GREEN; break;  // both switches pressed
-      case 0x1A: LEDS = BLUE; break;      // neither switch pressed
-			case 0x1C: LEDS = BLUE; break;   // SW1 pressed
-      case 0x1E: LEDS = RED; break;    // SW2 pressed
-      case 0xff: LEDS = GREEN; break;  // both switches pressed
-      case 0x01: LEDS = BLUE; break;      // neither switch pressed
-      default: LEDS = (RED);// unexpected return value
-			
-    }
+   
+    
 		
 		
     PF1 ^= 0x02;
@@ -288,7 +262,9 @@ void SysTick_Handler(void){
 		Hours = 1;
 	}
 	
-	
+	if((AlarmSet == 1) && (AlarmAm == Am) && (AlarmHour == Hours) && (AlarmMinute == Minutes) && (Counts == 0) && (Seconds <= 30)){
+		playAlarm();
+	}
 
 	
 
