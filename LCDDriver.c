@@ -681,6 +681,8 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin, char* AmPm, uint32_t alar
 		}
 		ST7735_OutUDec(alarmMin);
 		ST7735_OutString(alarmAmPm);
+	}else{
+		ST7735_FillRect(50, 0, 75, 8, 0x0000);
 	}
 	
 	switch(currentHr){
