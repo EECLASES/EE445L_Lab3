@@ -1,0 +1,19 @@
+Dependencies for Project 'PeriodicSysTickInts', Target 'PeriodicSysTickInts': (DO NOT MODIFY !)
+F (.\startup.s)(0x5D70274C)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list .\startup.lst --xref -o .\periodicsystickints_build\startup.o --depend .\periodicsystickints_build\startup.d)
+F (.\PeriodicSysTickInts.c)(0x5D8A9E8E)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM-o .\periodicsystickints_build\periodicsystickints.o --omf_browse .\periodicsystickints_build\periodicsystickints.crf --depend .\periodicsystickints_build\periodicsystickints.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599FA01E)
+I (../inc/tm4c123gh6pm.h)(0x5D70273E)
+I (../inc/SysTickInts.h)(0x5D8A9E8E)
+I (../inc/PLL.h)(0x5D70273D)
+I (ST7735.c)(0x5D88F764)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599FA01C)
+I (../inc/ST7735.h)(0x5D88F786)
+I (LCDDriver.c)(0x5D88F61B)
+F (..\inc\PLL.c)(0x5D70273D)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM-o .\periodicsystickints_build\pll.o --omf_browse .\periodicsystickints_build\pll.crf --depend .\periodicsystickints_build\pll.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599FA01E)
+I (..\inc\../inc/PLL.h)(0x5D70273D)
+I (..\inc\../inc/tm4c123gh6pm.h)(0x5D70273E)
+F (..\inc\SysTickInts.c)(0x5D8A9AF4)(-c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM-o .\periodicsystickints_build\systickints.o --omf_browse .\periodicsystickints_build\systickints.crf --depend .\periodicsystickints_build\systickints.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599FA01E)
+I (..\inc\../inc/tm4c123gh6pm.h)(0x5D70273E)
+I (..\inc\SysTickInts.h)(0x5D8A9E8E)

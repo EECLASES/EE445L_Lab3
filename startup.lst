@@ -1089,12 +1089,13 @@ ARM Macro Assembler    Page 17
               00000000 
               00000400 
               00000000 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4 --apcs=interw
-ork --depend=.\startup.d -o.\startup.o -I.\RTE\_PeriodicSysTickInts -IC:\Keil_v
-5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4C_D
-FP\1.1.0\Device\Include\TM4C123 --predefine="__EVAL SETA 1" --predefine="__UVIS
-ION_VERSION SETA 526" --predefine="_RTE_ SETA 1" --predefine="TM4C123GH6PM SETA
- 1" --list=.\startup.lst startup.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\periodicsystickints_build\startup.d -o.\periodicsystickints_b
+uild\startup.o -I.\RTE\_PeriodicSysTickInts -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4
+.0\CMSIS\Core\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\
+TM4C123 --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 526" --
+predefine="_RTE_ SETA 1" --predefine="TM4C123GH6PM SETA 1" --list=.\startup.lst
+ startup.s
 
 
 
@@ -2541,4 +2542,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 2 symbols
-483 symbols in table
+484 symbols in table

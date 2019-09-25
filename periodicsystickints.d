@@ -3,9 +3,11 @@
 .\periodicsystickints.o: ../inc/tm4c123gh6pm.h
 .\periodicsystickints.o: ../inc/SysTickInts.h
 .\periodicsystickints.o: ../inc/PLL.h
-.\periodicsystickints.o: ../inc/ST7735.c
+.\periodicsystickints.o: ST7735.c
 .\periodicsystickints.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\periodicsystickints.o: ../inc/ST7735.h
 .\periodicsystickints.o: LCDDriver.c
 .\periodicsystickints.o: SoundDriver.c
 .\periodicsystickints.o: SwitchDriver.c
+.\periodicsystickints.o: ../inc/Switch.c
+.\periodicsystickints.o: ../inc/Switch.h
