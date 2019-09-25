@@ -7,3 +7,4 @@
 .\periodicsystickints_build\periodicsystickints.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\periodicsystickints_build\periodicsystickints.o: ../inc/ST7735.h
 .\periodicsystickints_build\periodicsystickints.o: LCDDriver.c
+.\periodicsystickints_build\periodicsystickints.o: SwitchDriver.c
