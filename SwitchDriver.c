@@ -1,60 +1,6 @@
-// Switch.c
-// Runs on TMC4C123
-// Use GPIO in edge time mode to request interrupts on any
-// edge of PF4 and start Timer0B. In Timer0B one-shot
-// interrupts, record the state of the switch once it has stopped
-// bouncing.
-// Daniel Valvano
-// May 3, 2015
+//This is the SwitchDriver file with Function Definitions
 
-/* This example accompanies the book
-   "Embedded Systems: Real Time Interfacing to Arm Cortex M Microcontrollers",
-   ISBN: 978-1463590154, Jonathan Valvano, copyright (c) 2015
-
- Copyright 2015 by Jonathan W. Valvano, valvano@mail.utexas.edu
-    You may use, edit, run or distribute this file
-    as long as the above copyright notice remains
- THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
- OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
- VALVANO SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL,
- OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
- For more information about my classes, my research, and my books, see
- http://users.ece.utexas.edu/~valvano/
- */
-
-// PF4 connected to a negative logic switch using internal pull-up (trigger on both edges)
-#include <stdint.h>
-#include "../inc/tm4c123gh6pm.h"
-#define PF4                     (*((volatile uint32_t *)0x40025040))
-#define PF0                     (*((volatile uint32_t *)0x40025004))
-#define PB1 (*((volatile uint32_t *)0x40005008))
-#define PB2 (*((volatile uint32_t *)0x40005010))
-#define PB3 (*((volatile uint32_t *)0x40005020))
-#define PB4 (*((volatile uint32_t *)0x40005040))
-
-#define GPIO_LOCK_KEY           0x4C4F434B  // Unlocks the GPIO_CR register
-
-void DisableInterrupts(void); // Disable interrupts
-void EnableInterrupts(void);  // Enable interrupts
-long StartCritical (void);    // previous I bit, disable interrupts
-void EndCritical(long sr);    // restore I bit to previous value
-void WaitForInterrupt(void);  // low power mode
-
-volatile static unsigned long Touch;     // true on touch
-volatile static unsigned long Release;   // true on release
-volatile static unsigned long Last;      // previous
-void (*TouchTask)(void);    // user function to be executed on touch
-void (*ReleaseTask)(void);  // user function to be executed on release
-
-volatile static unsigned long Touch1;     // true on touch
-volatile static unsigned long Release1;   // true on release
-volatile static unsigned long Last1;      // previous
-void (*TouchTask1)(void);    // user function to be executed on touch
-void (*ReleaseTask1)(void);  // user function to be executed on release
-
-
-
+#include "SwitchDriver.h"
 
 static void Timer0Arm(void){
   TIMER0_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
@@ -76,11 +22,14 @@ static void GPIOArm(void){
   NVIC_PRI7_R = (NVIC_PRI7_R&0xFF00FFFF)|0x00A00000; // (g) priority 5
   NVIC_EN0_R = 0x40000000;      // (h) enable interrupt 30 in NVIC  
 }
+
+
 // Initialize switch interface on PF4 and pf0
 // Inputs:  pointer to a function to call on touch (falling edge),
 //          pointer to a function to call on release (rising edge)
 // Outputs: none 
-void Switch_Init(void(*touchtask)(void), void(*releasetask)(void)){
+void Switch_Init(void(*touchtask)(void), void(*releasetask)(void),
+										void(*touchtask1)(void),void(*releasetask1)(void)){
   // **** general initialization ****
   SYSCTL_RCGCGPIO_R |= 0x00000020; // (a) activate clock for port F
   while((SYSCTL_PRGPIO_R & 0x00000020) == 0){};
@@ -100,6 +49,8 @@ void Switch_Init(void(*touchtask)(void), void(*releasetask)(void)){
   SYSCTL_RCGCTIMER_R |= 0x01;   // 0) activate TIMER0
   TouchTask = touchtask;           // user function 
   ReleaseTask = releasetask;       // user function 
+	TouchTask1 = touchtask1;
+	ReleaseTask1 = releasetask1;
   Touch = 0;                       // allow time to finish activating
   Release = 0;
   Last = ((PF4|PF0)&0x11);                      // initial switch state
@@ -108,13 +59,22 @@ void Switch_Init(void(*touchtask)(void), void(*releasetask)(void)){
 void GPIOPortF_Handler(void){
   GPIO_PORTF_IM_R &= ~0x11;     // disarm interrupt on PF4 
   
-if(Last==0x10 || Last==0x01){    // 0x10 means it was previously released
+if(Last==0x10 ){    // 0x10 means it was previously released
     Touch = 1;       // touch occurred
     (*TouchTask)();  // execute user task
   }
   else if (Last!=0x10 || Last!=0x01){
     Release = 1;       // release occurred
     (*ReleaseTask)();  // execute user task
+  }
+	
+	if(Last==0x01 ){    // 0x10 means it was previously released
+    Touch1 = 1;       // touch occurred
+    (*TouchTask1)();  // execute user task
+  }
+	else if (Last!=0x01){
+    Release1 = 1;       // release occurred
+    (*ReleaseTask1)();  // execute user task
   }
   Timer0Arm(); // start one shot
 }
@@ -168,7 +128,26 @@ unsigned long Switch_Input(void){
 
 
 
-//This is the Switch init for portb functions
+
+
+
+
+
+ 
+ 
+static void GPIOArm1(void){ 
+	GPIO_PORTC_ICR_R = 0xF0;   //CLEAR FLAG 4ON PC4
+	GPIO_PORTC_IM_R |= 0xF0;   //CLEAR FLAG 4ON PC4
+  NVIC_PRI0_R = (NVIC_PRI0_R&0xFF00FFFF)|0x00A00000; //PRIORITY 5
+	NVIC_EN0_R = 4; //ENABLE INTERRUPT TWO
+	
+}
+void Timer1A_Handler(void){
+  TIMER1_IMR_R = 0x00000000;    // disarm timeout interrupt
+  Last1 = ((PC4|PC5|PC6|PC7)&0xF0);  // switch state
+  GPIOArm1();   // start GPIO
+}
+
 static void Timer1Arm(void){
   TIMER1_CTL_R = 0x00000000;    // 1) disable TIMER0A during setup
   TIMER1_CFG_R = 0x00000000;    // 2) configure for 32-bit mode
@@ -177,68 +156,20 @@ static void Timer1Arm(void){
   TIMER1_TAPR_R = 0;            // 5) bus clock resolution
   TIMER1_ICR_R = 0x00000001;    // 6) clear TIMER0A timeout flag
   TIMER1_IMR_R = 0x00000001;    // 7) arm timeout interrupt
-  NVIC_PRI4_R = (NVIC_PRI4_R&0x00FFFFFF)|0x80000000; // 8) priority 4
+  NVIC_PRI5_R = (NVIC_PRI5_R&0xFFFF00FF)|0x00008000; // 8) priority 4
 // interrupts enabled in the main program after all devices initialized
 // vector number 35, interrupt number 19
   NVIC_EN0_R = 1<<21;           // 9) enable IRQ 19 in NVIC
-  TIMER1_CTL_R = 0x00000001;    // 10) enable TIMER0A
+  TIMER1_CTL_R = 0x00000001;    // 10) enable TIMER1A
 }
-static void GPIOArm1(void){
-  GPIO_PORTB_ICR_R = 0x1E;      // (e) clear flag4 and flag0
-  GPIO_PORTB_IM_R |= 0x1E;      // (f) arm interrupt on PF4 *** No IME bit as mentioned in Book ***
-  NVIC_PRI7_R = (NVIC_PRI7_R&0xFF00FFFF)|0x00A00000; // (g) priority 5
-  NVIC_EN0_R = 0x00000001;      // (h) enable interrupt 1 in NVIC  
-}
-void Timer1A_Handler(void){
-  TIMER1_IMR_R = 0x00000000;    // disarm timeout interrupt
-  Last1 = ((PB1|PB2|PB3|PB4)&0x1E);  // switch state
-  GPIOArm1();   // start GPIO
-}
-void Switch_Init1(void(*touchtask1)(void), void(*releasetask1)(void)){
-  // **** general initialization ****
-  SYSCTL_RCGCGPIO_R |= 0x00000002; // (a) activate clock for port F
-  while((SYSCTL_PRGPIO_R & 0x00000002) == 0){};
-   
-	GPIO_PORTB_DIR_R &= ~0x1E;    // (c) make PF4 in (built-in button)
-  GPIO_PORTB_AFSEL_R &= ~0x1E;  //     disable alt funct on PF4
-  GPIO_PORTB_DEN_R |= 0x1E;     //     enable digital I/O on PF4   
-  GPIO_PORTB_PCTL_R &= ~0x000FFFF0; // configure PF4 as GPIO
-  GPIO_PORTB_AMSEL_R = 0;       //     disable analog functionality on PF
-  //GPIO_PORTB_PUR_R |= 0x1E;     //     enable weak pull-up on PF4
-  GPIO_PORTB_IS_R &= ~0x1E;     // (d) PF4 is edge-sensitive
-  GPIO_PORTB_IBE_R &= ~0x1E;     //     PF4 is both edges
-  GPIO_PORTB_IEV_R |= 0x1E;
-		
-		GPIOArm1();
-
-  SYSCTL_RCGCTIMER_R |= 0x02;   // 0) activate TIMER0//
-  TouchTask1 = touchtask1;           // user function 
-  ReleaseTask1 = releasetask1;       // user function 
-  Touch1 = 0;                       // allow time to finish activating
-  Release1 = 0;
-  Last1 = ((PB1|PB2|PB3|PB4)&0x1E);                      // initial switch state
- }
-// Interrupt on rising or falling edge of PF4 (CCP0)
-void GPIOPortB_Handler(void){
-  GPIO_PORTB_IM_R &= ~0x1E;     // disarm interrupt on PF4 
-  if(Last1){    // 0x10 means it was previously released
-    Touch1 = 1;       // touch occurred
-    (*TouchTask1)();  // execute user task
-  }
-  else {
-    Release1 = 1;       // release occurred
-    (*ReleaseTask1)();  // execute user task
-  }
-  Timer1Arm(); // start one shot
-}
-
-
-
 //let's try to configure portc to work with the interrupts
 
 
 volatile uint32_t FallingEdges = 0;
-void EdgeCounter_Init(void){
+void EdgeCounter_Init(void(*touchtask2)(void), void(*releasetask2)(void),
+										void(*touchtask3)(void),void(*releasetask3)(void),
+											void(*touchtask4)(void), void(*releasetask4)(void),
+										void(*touchtask5)(void),void(*releasetask5)(void)){
 	SYSCTL_RCGCGPIO_R |= 0x04;  //activate clock for port c
 	FallingEdges = 0;
 	GPIO_PORTC_DIR_R &= ~0xF0;  //make portc an input
@@ -246,14 +177,89 @@ void EdgeCounter_Init(void){
 	GPIO_PORTC_IS_R &=  ~0xF0;  //PORTC IS EDGE SENSITIVE
 	GPIO_PORTC_IBE_R &= ~0xF0;
 	GPIO_PORTC_IEV_R |= 0xF0;   //BC FALLING EDGE
-	GPIO_PORTC_ICR_R = 0xF0;   //CLEAR FLAG 4ON PC4
-	GPIO_PORTC_IM_R |= 0xF0;   //CLEAR FLAG 4ON PC4
-  NVIC_PRI0_R = (NVIC_PRI0_R&0xFF00FFFF)|0x00A00000; //PRIORITY 5
-	NVIC_EN0_R = 4; //ENABLE INTERRUPT TWO
 	
+	GPIOArm1();
 	
+
+											
+	SYSCTL_RCGCTIMER_R |= 0x02;   // 0) activate TIMER0//
+											
+	//C4
+  TouchTask2 = touchtask2;           // user function 
+  ReleaseTask2 = releasetask2;       // user function 
+  Touch2 = 0;                       // allow time to finish activating
+  Release2 = 0;
+ 
+	//C5
+	TouchTask3 = touchtask3;           // user function 
+  ReleaseTask3 = releasetask3;       // user function 
+  Touch3= 0;                       // allow time to finish activating
+  Release3= 0;								
+											
+	//C6
+	TouchTask4 = touchtask4;           // user function 
+  ReleaseTask4 = releasetask4;       // user function 
+  Touch4= 0;                       // allow time to finish activating
+  Release4= 0;
 	
+	//C7
+	TouchTask5 = touchtask5;           // user function 
+  ReleaseTask5 = releasetask5;       // user function 
+  Touch5 = 0;                       // allow time to finish activating
+  Release5 = 0;
+											
+	Last1 = ((PC4|PC5|PC6|PC7)&0xF0);                      // initial switch state
+
 }
 
+void GPIOPortC_Handler(void){
+	  GPIO_PORTC_IM_R &= ~0xF0;     // disarm interrupt on PF4 
 
+	if(Last1==0x10 ){    // 0x10 means it was previously released
+    Touch2 = 1;       // touch occurred
+    (*TouchTask2)();  // execute user task
+			
+			if (Last1!=0x10 ){
+				Release2 = 1;       // release occurred
+				(*ReleaseTask2)();  // execute user task
+			
+			}
+		}
+	
+			
+	if(Last1==0x20 ){    // 0x10 means it was previously released
+    Touch3 = 1;       // touch occurred
+    (*TouchTask3)();  // execute user task
+		
+  
+		if (Last1!=0x20){
+			Release3 = 1;       // release occurred
+			(*ReleaseTask3)();  // execute user task
+		}
+	}
+			
+	
+	else if(Last1==0x40 ){    // 0x10 means it was previously released
+    Touch4= 1;       // touch occurred
+    (*TouchTask4)();  // execute user task
+		
+  }
+	else if (Last1!=0x4){
+    Release4= 1;       // release occurred
+    (*ReleaseTask4)();  // execute user task
+
+  }
+	Timer1Arm();
+			
+	if(Last1==0x80 ){    // 0x10 means it was previously released
+    Touch5 = 1;       // touch occurred
+    (*TouchTask5)();  // execute user task
+  }
+	else if (Last1!=0x80){
+    Release5 = 1;       // release occurred
+    (*ReleaseTask5)();  // execute user task
+  }
+	Timer1Arm();
+			return;
+}
 

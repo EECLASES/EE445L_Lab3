@@ -8,6 +8,11 @@
 .\periodicsystickints.o: ../inc/ST7735.h
 .\periodicsystickints.o: LCDDriver.c
 .\periodicsystickints.o: SwitchDriver.c
+.\periodicsystickints.o: SwitchDriver.h
 .\periodicsystickints.o: SoundDriver.c
 .\periodicsystickints.o: ../inc/Timer2A.h
 .\periodicsystickints.o: ../inc/Timer2A.c
+.\periodicsystickints.o: SoundDriver.h
+.\periodicsystickints.o: LCDDriver.h
+.\periodicsystickints.o: SwitchDriver.h
+.\periodicsystickints.o: SoundDriver.h

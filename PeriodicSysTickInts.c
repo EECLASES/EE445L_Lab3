@@ -33,7 +33,10 @@
 #include "LCDDriver.c"
 #include "SwitchDriver.c"
 #include "SoundDriver.c"
-//#include "SwitchDriver.c"
+//included all header files
+#include "LCDDriver.h"
+#include "SwitchDriver.h"
+#include "SoundDriver.h"
 
 #define PB0 (*((volatile uint32_t *)0x40005004))
 
@@ -71,20 +74,10 @@ volatile uint16_t AlarmSet = 0;
 volatile uint16_t AlarmAm = 1;
 
 volatile uint32_t SpeakerCount = 0;
+int state = 0;
 
 
 
-//THIS IS FOR THE SWITCH
-uint32_t RiseCount,FallCount;
-void Rise(void){
-  PF3 ^= 0x08;
-  RiseCount++;
-}
-void Fall(void){
-  PF2 ^= 0x04;
-  FallCount++;
-	playAlarm();
-}
 void incHour(){
 	Hours++;
 	if( Hours >= 13){
@@ -152,31 +145,104 @@ void toggleAlarm(void){
 	DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
 
 }
+//THIS IS FOR THE SWITCH
+uint32_t RiseCount,FallCount;
+void Rise(void){
+  
+  RiseCount++;
+}
+void Fall(void){
+  
+  FallCount++;
+	switch(state){
+		
+	case 0x00: {
+		incHour();
+		break;
+	}
+	case 0x01: {
+		incAlarmHour();
+		break;
+	}
+	}
+	
+	
+}
+void Rise1(void){
+  
+  RiseCount++;
+}
+void Fall1(void){
+  switch(state){
+		
+	case 0x00: {
+		incMinute();
+		break;
+	}
+	case 0x01: {
+		incAlarmMinute();
+		break;
+	}
+	default: state = state;
 
-void GPIOPortC_Handler(void){
-	if(GPIO_PORTC_RIS_R&0X10){
-	GPIO_PORTC_ICR_R = 0x10; //acknowledge flag 4
 	}
-	if(GPIO_PORTC_RIS_R&0X20){
-	GPIO_PORTC_ICR_R = 0x20; //acknowledge flag 4
-	}
-	if(GPIO_PORTC_RIS_R&0X40){
-	GPIO_PORTC_ICR_R = 0x40; //acknowledge flag 4
-	}
-	if(GPIO_PORTC_RIS_R&0X80){
-	GPIO_PORTC_ICR_R = 0x80; //acknowledge flag 4
-	}
-	PF2 ^= 0x04;
 }
-void GPIOPortE_Handler(void){
-	if(GPIO_PORTE_RIS_R&0X10){
-	GPIO_PORTE_ICR_R = 0x10; //acknowledge flag 4
-	}
-	if(GPIO_PORTE_RIS_R&0X20){
-	GPIO_PORTE_ICR_R = 0x20; //acknowledge flag 4
-	}
-	PF2 ^= 0x04;
+
+void Rise2(void){
+  
+  RiseCount++;
+	
 }
+void Fall2(void){
+  switch(state){
+		
+	case 0x00: {
+		state = 1;
+		break;
+	}
+	case 0x01: {
+		state = 0;
+		break;
+	}
+	default: state = state;
+	}
+}
+
+void Rise3(void){
+  
+}
+void Fall3(void){
+  switch(state){
+		
+	case 0x00: {
+		toggleAmPm();
+		break;
+	}
+	case 0x01: {
+		toggleAlarmAmPm();
+		break;
+	}
+	}
+	
+}
+void Rise4(void){
+  
+}
+void Fall4(void){
+  playAlarm();
+	
+}
+void Rise5(void){
+ 
+}
+void Fall5(void){
+  PF2 ^= 0x04;
+ 
+	
+}
+
+
+
 
 int main(void){
 	//This is for the Systick Intitialization
@@ -185,8 +251,8 @@ int main(void){
   while((SYSCTL_PRGPIO_R & 0x00000020) == 0){};
 
 	Counts = 0;
-		Switch_Init(&Fall,&Rise);     // initialize GPIO Port F interrupt
-		EdgeCounter_Init();
+		Switch_Init(&Fall,&Rise,&Fall1,&Rise1);     // initialize GPIO Port F interrupt
+		EdgeCounter_Init(&Fall2,&Rise2,&Fall3,&Rise3, &Fall4,&Rise4,&Fall5,&Rise5);
 		//Switch_Init();
 		//Switch_Init3();
 	  //Board_Init();  
@@ -201,7 +267,7 @@ int main(void){
 
 	
   SysTick_Init(80000);        // initialize SysTick timer
-	//Sound_Init();
+	Sound_Init();
   EnableInterrupts();
 
 	initLCD();
@@ -212,7 +278,7 @@ int main(void){
     
 		
 		
-    PF1 ^= 0x02;
+    //PF1 ^= 0x02;
   }
 }
 
@@ -225,7 +291,7 @@ void SysTick_Handler(void){
   Counts = Counts + 1;
 	SpeakerCount = SpeakerCount +1;
 	if(SpeakerCount == 38){
-		PB0 ^= 0;
+		//PD0 ^= 0;
 		SpeakerCount = 0;
 	}
 	

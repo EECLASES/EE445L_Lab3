@@ -9,9 +9,7 @@ Section Cross References
     startup.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(RESET) refers to startup.o(STACK) for StackMem
     startup.o(RESET) refers to periodicsystickints.o(i.SysTick_Handler) for SysTick_Handler
-    startup.o(RESET) refers to periodicsystickints.o(i.GPIOPortB_Handler) for GPIOPortB_Handler
     startup.o(RESET) refers to periodicsystickints.o(i.GPIOPortC_Handler) for GPIOPortC_Handler
-    startup.o(RESET) refers to periodicsystickints.o(i.GPIOPortE_Handler) for GPIOPortE_Handler
     startup.o(RESET) refers to periodicsystickints.o(i.Timer0A_Handler) for Timer0A_Handler
     startup.o(RESET) refers to periodicsystickints.o(i.Timer1A_Handler) for Timer1A_Handler
     startup.o(RESET) refers to periodicsystickints.o(i.Timer2A_Handler) for Timer2A_Handler
@@ -26,11 +24,21 @@ Section Cross References
     periodicsystickints.o(i.DrawTime) refers to periodicsystickints.o(i.ST7735_OutString) for ST7735_OutString
     periodicsystickints.o(i.DrawTime) refers to periodicsystickints.o(i.ST7735_OutUDec) for ST7735_OutUDec
     periodicsystickints.o(i.DrawTime) refers to periodicsystickints.o(.data) for HrY2
+    periodicsystickints.o(i.EdgeCounter_Init) refers to periodicsystickints.o(i.GPIOArm1) for GPIOArm1
     periodicsystickints.o(i.EdgeCounter_Init) refers to periodicsystickints.o(.data) for FallingEdges
-    periodicsystickints.o(i.Fall) refers to periodicsystickints.o(i.playAlarm) for playAlarm
+    periodicsystickints.o(i.Fall) refers to periodicsystickints.o(i.incHour) for incHour
+    periodicsystickints.o(i.Fall) refers to periodicsystickints.o(i.incAlarmHour) for incAlarmHour
     periodicsystickints.o(i.Fall) refers to periodicsystickints.o(.data) for FallCount
-    periodicsystickints.o(i.GPIOPortB_Handler) refers to periodicsystickints.o(i.Timer1Arm) for Timer1Arm
-    periodicsystickints.o(i.GPIOPortB_Handler) refers to periodicsystickints.o(.data) for Last1
+    periodicsystickints.o(i.Fall1) refers to periodicsystickints.o(i.incMinute) for incMinute
+    periodicsystickints.o(i.Fall1) refers to periodicsystickints.o(i.incAlarmMinute) for incAlarmMinute
+    periodicsystickints.o(i.Fall1) refers to periodicsystickints.o(.data) for state
+    periodicsystickints.o(i.Fall2) refers to periodicsystickints.o(.data) for state
+    periodicsystickints.o(i.Fall3) refers to periodicsystickints.o(i.toggleAmPm) for toggleAmPm
+    periodicsystickints.o(i.Fall3) refers to periodicsystickints.o(i.toggleAlarmAmPm) for toggleAlarmAmPm
+    periodicsystickints.o(i.Fall3) refers to periodicsystickints.o(.data) for state
+    periodicsystickints.o(i.Fall4) refers to periodicsystickints.o(i.playAlarm) for playAlarm
+    periodicsystickints.o(i.GPIOPortC_Handler) refers to periodicsystickints.o(i.Timer1Arm) for Timer1Arm
+    periodicsystickints.o(i.GPIOPortC_Handler) refers to periodicsystickints.o(.data) for Last1
     periodicsystickints.o(i.GPIOPortF_Handler) refers to periodicsystickints.o(i.Timer0Arm) for Timer0Arm
     periodicsystickints.o(i.GPIOPortF_Handler) refers to periodicsystickints.o(.data) for Last
     periodicsystickints.o(i.Output_Clear) refers to periodicsystickints.o(i.ST7735_FillScreen) for ST7735_FillScreen
@@ -41,6 +49,8 @@ Section Cross References
     periodicsystickints.o(i.Output_On) refers to periodicsystickints.o(i.Output_Init) for Output_Init
     periodicsystickints.o(i.PC5toggle) refers to periodicsystickints.o(.data) for alarm
     periodicsystickints.o(i.Rise) refers to periodicsystickints.o(.data) for RiseCount
+    periodicsystickints.o(i.Rise1) refers to periodicsystickints.o(.data) for RiseCount
+    periodicsystickints.o(i.Rise2) refers to periodicsystickints.o(.data) for RiseCount
     periodicsystickints.o(i.ST7735_DrawBitmap) refers to periodicsystickints.o(i.setAddrWindow) for setAddrWindow
     periodicsystickints.o(i.ST7735_DrawBitmap) refers to periodicsystickints.o(i.writedata) for writedata
     periodicsystickints.o(i.ST7735_DrawBitmap) refers to periodicsystickints.o(i.deselect) for deselect
@@ -144,8 +154,6 @@ Section Cross References
     periodicsystickints.o(i.Sound_Init) refers to periodicsystickints.o(i.PC5toggle) for PC5toggle
     periodicsystickints.o(i.Switch_Init) refers to periodicsystickints.o(i.GPIOArm) for GPIOArm
     periodicsystickints.o(i.Switch_Init) refers to periodicsystickints.o(.data) for TouchTask
-    periodicsystickints.o(i.Switch_Init1) refers to periodicsystickints.o(i.GPIOArm1) for GPIOArm1
-    periodicsystickints.o(i.Switch_Init1) refers to periodicsystickints.o(.data) for TouchTask1
     periodicsystickints.o(i.Switch_WaitPress) refers to periodicsystickints.o(.data) for Touch
     periodicsystickints.o(i.Switch_WaitRelease) refers to periodicsystickints.o(.data) for Release
     periodicsystickints.o(i.SysTick_Handler) refers to periodicsystickints.o(i.DrawTime) for DrawTime
@@ -183,12 +191,23 @@ Section Cross References
     periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Switch_Init) for Switch_Init
     periodicsystickints.o(i.main) refers to periodicsystickints.o(i.EdgeCounter_Init) for EdgeCounter_Init
     periodicsystickints.o(i.main) refers to systickints.o(i.SysTick_Init) for SysTick_Init
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Sound_Init) for Sound_Init
     periodicsystickints.o(i.main) refers to startup.o(.text) for EnableInterrupts
     periodicsystickints.o(i.main) refers to periodicsystickints.o(i.initLCD) for initLCD
     periodicsystickints.o(i.main) refers to periodicsystickints.o(i.DrawTime) for DrawTime
     periodicsystickints.o(i.main) refers to periodicsystickints.o(.data) for Counts
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Rise1) for Rise1
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Fall1) for Fall1
     periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Rise) for Rise
     periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Fall) for Fall
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Rise5) for Rise5
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Fall5) for Fall5
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Rise4) for Rise4
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Fall4) for Fall4
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Rise3) for Rise3
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Fall3) for Fall3
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Rise2) for Rise2
+    periodicsystickints.o(i.main) refers to periodicsystickints.o(i.Fall2) for Fall2
     periodicsystickints.o(i.playAlarm) refers to periodicsystickints.o(.data) for alarm
     periodicsystickints.o(i.plotLineX) refers to periodicsystickints.o(i.ST7735_DrawPixel) for ST7735_DrawPixel
     periodicsystickints.o(i.plotLineY) refers to periodicsystickints.o(i.ST7735_DrawPixel) for ST7735_DrawPixel
@@ -313,7 +332,6 @@ Removing Unused input sections from the image.
     Removing periodicsystickints.o(i.Output_Init), (16 bytes).
     Removing periodicsystickints.o(i.Output_Off), (8 bytes).
     Removing periodicsystickints.o(i.Output_On), (8 bytes).
-    Removing periodicsystickints.o(i.PC5toggle), (64 bytes).
     Removing periodicsystickints.o(i.ST7735_Color565), (24 bytes).
     Removing periodicsystickints.o(i.ST7735_DrawChar), (276 bytes).
     Removing periodicsystickints.o(i.ST7735_DrawCircle), (172 bytes).
@@ -334,24 +352,15 @@ Removing Unused input sections from the image.
     Removing periodicsystickints.o(i.ST7735_SwapColor), (18 bytes).
     Removing periodicsystickints.o(i.ST7735_XYplot), (208 bytes).
     Removing periodicsystickints.o(i.ST7735_XYplotInit), (108 bytes).
-    Removing periodicsystickints.o(i.Sound_Init), (124 bytes).
-    Removing periodicsystickints.o(i.Switch_Init1), (248 bytes).
     Removing periodicsystickints.o(i.Switch_Input), (20 bytes).
     Removing periodicsystickints.o(i.Switch_WaitPress), (24 bytes).
     Removing periodicsystickints.o(i.Switch_WaitRelease), (24 bytes).
-    Removing periodicsystickints.o(i.Timer2_Init), (96 bytes).
     Removing periodicsystickints.o(i.ferror), (8 bytes).
     Removing periodicsystickints.o(i.fgetc), (6 bytes).
     Removing periodicsystickints.o(i.fputc), (16 bytes).
-    Removing periodicsystickints.o(i.incAlarmHour), (92 bytes).
-    Removing periodicsystickints.o(i.incAlarmMinute), (116 bytes).
-    Removing periodicsystickints.o(i.incHour), (92 bytes).
-    Removing periodicsystickints.o(i.incMinute), (116 bytes).
     Removing periodicsystickints.o(i.toggleAlarm), (92 bytes).
-    Removing periodicsystickints.o(i.toggleAlarmAmPm), (116 bytes).
-    Removing periodicsystickints.o(i.toggleAmPm), (116 bytes).
 
-42 unused section(s) (total 3864 bytes) removed from the image.
+32 unused section(s) (total 2684 bytes) removed from the image.
 
 ==============================================================================
 
@@ -362,51 +371,51 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      644  startup.o(RESET)
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
@@ -471,69 +480,86 @@ Image Symbol Table
     i.Delay1ms                               0x000003ca   Section        0  periodicsystickints.o(i.Delay1ms)
     i.DrawTime                               0x000003ec   Section        0  periodicsystickints.o(i.DrawTime)
     i.EdgeCounter_Init                       0x00000a54   Section        0  periodicsystickints.o(i.EdgeCounter_Init)
-    i.Fall                                   0x00000af0   Section        0  periodicsystickints.o(i.Fall)
-    i.GPIOArm                                0x00000b18   Section        0  periodicsystickints.o(i.GPIOArm)
-    GPIOArm                                  0x00000b19   Thumb Code    48  periodicsystickints.o(i.GPIOArm)
-    i.GPIOArm1                               0x00000b54   Section        0  periodicsystickints.o(i.GPIOArm1)
-    GPIOArm1                                 0x00000b55   Thumb Code    46  periodicsystickints.o(i.GPIOArm1)
-    i.GPIOPortB_Handler                      0x00000b90   Section        0  periodicsystickints.o(i.GPIOPortB_Handler)
-    i.GPIOPortC_Handler                      0x00000bdc   Section        0  periodicsystickints.o(i.GPIOPortC_Handler)
-    i.GPIOPortE_Handler                      0x00000c3c   Section        0  periodicsystickints.o(i.GPIOPortE_Handler)
-    i.GPIOPortF_Handler                      0x00000c78   Section        0  periodicsystickints.o(i.GPIOPortF_Handler)
-    i.PLL_Init                               0x00000ce0   Section        0  pll.o(i.PLL_Init)
-    i.Rise                                   0x00000d5c   Section        0  periodicsystickints.o(i.Rise)
-    i.ST7735_DrawBitmap                      0x00000d7c   Section        0  periodicsystickints.o(i.ST7735_DrawBitmap)
-    i.ST7735_DrawCharS                       0x00000ea0   Section        0  periodicsystickints.o(i.ST7735_DrawCharS)
-    i.ST7735_DrawPixel                       0x00000f98   Section        0  periodicsystickints.o(i.ST7735_DrawPixel)
-    i.ST7735_DrawString                      0x00000fe4   Section        0  periodicsystickints.o(i.ST7735_DrawString)
-    i.ST7735_FillRect                        0x00001038   Section        0  periodicsystickints.o(i.ST7735_FillRect)
-    i.ST7735_FillScreen                      0x000010e8   Section        0  periodicsystickints.o(i.ST7735_FillScreen)
-    i.ST7735_InitR                           0x0000110c   Section        0  periodicsystickints.o(i.ST7735_InitR)
-    i.ST7735_Line                            0x00001188   Section        0  periodicsystickints.o(i.ST7735_Line)
-    i.ST7735_OutChar                         0x00001208   Section        0  periodicsystickints.o(i.ST7735_OutChar)
-    i.ST7735_OutString                       0x000012dc   Section        0  periodicsystickints.o(i.ST7735_OutString)
-    i.ST7735_OutUDec                         0x000012f4   Section        0  periodicsystickints.o(i.ST7735_OutUDec)
-    i.ST7735_SetCursor                       0x00001380   Section        0  periodicsystickints.o(i.ST7735_SetCursor)
-    i.ST7735_SetTextColor                    0x000013a0   Section        0  periodicsystickints.o(i.ST7735_SetTextColor)
-    i.Switch_Init                            0x000013ac   Section        0  periodicsystickints.o(i.Switch_Init)
-    i.SysTick_Handler                        0x000014b8   Section        0  periodicsystickints.o(i.SysTick_Handler)
-    i.SysTick_Init                           0x00001648   Section        0  systickints.o(i.SysTick_Init)
-    i.Timer0A_Handler                        0x00001688   Section        0  periodicsystickints.o(i.Timer0A_Handler)
-    i.Timer0Arm                              0x000016b4   Section        0  periodicsystickints.o(i.Timer0Arm)
-    Timer0Arm                                0x000016b5   Thumb Code    58  periodicsystickints.o(i.Timer0Arm)
-    i.Timer1A_Handler                        0x00001700   Section        0  periodicsystickints.o(i.Timer1A_Handler)
-    i.Timer1Arm                              0x00001738   Section        0  periodicsystickints.o(i.Timer1Arm)
-    Timer1Arm                                0x00001739   Thumb Code    58  periodicsystickints.o(i.Timer1Arm)
-    i.Timer2A_Handler                        0x00001784   Section        0  periodicsystickints.o(i.Timer2A_Handler)
-    i.commandList                            0x0000179c   Section        0  periodicsystickints.o(i.commandList)
-    commandList                              0x0000179d   Thumb Code    86  periodicsystickints.o(i.commandList)
-    i.commonInit                             0x000017f4   Section        0  periodicsystickints.o(i.commonInit)
-    commonInit                               0x000017f5   Thumb Code   342  periodicsystickints.o(i.commonInit)
-    i.deselect                               0x0000197c   Section        0  periodicsystickints.o(i.deselect)
-    deselect                                 0x0000197d   Thumb Code    24  periodicsystickints.o(i.deselect)
-    i.fillmessage                            0x00001998   Section        0  periodicsystickints.o(i.fillmessage)
-    i.initLCD                                0x000019e0   Section        0  periodicsystickints.o(i.initLCD)
-    i.main                                   0x00001a58   Section        0  periodicsystickints.o(i.main)
-    i.playAlarm                              0x00001b50   Section        0  periodicsystickints.o(i.playAlarm)
-    i.plotLineX                              0x00001b5c   Section        0  periodicsystickints.o(i.plotLineX)
-    i.plotLineY                              0x00001c02   Section        0  periodicsystickints.o(i.plotLineY)
-    i.pushColor                              0x00001ca6   Section        0  periodicsystickints.o(i.pushColor)
-    pushColor                                0x00001ca7   Thumb Code    18  periodicsystickints.o(i.pushColor)
-    i.setAddrWindow                          0x00001cb8   Section        0  periodicsystickints.o(i.setAddrWindow)
-    setAddrWindow                            0x00001cb9   Thumb Code   106  periodicsystickints.o(i.setAddrWindow)
-    i.writecommand                           0x00001d2c   Section        0  periodicsystickints.o(i.writecommand)
-    writecommand                             0x00001d2d   Thumb Code    46  periodicsystickints.o(i.writecommand)
-    i.writedata                              0x00001d64   Section        0  periodicsystickints.o(i.writedata)
-    writedata                                0x00001d65   Thumb Code    26  periodicsystickints.o(i.writedata)
-    .constdata                               0x00001d88   Section    22114  periodicsystickints.o(.constdata)
-    Font                                     0x00001d88   Data        1275  periodicsystickints.o(.constdata)
-    Bcmd                                     0x00002283   Data         103  periodicsystickints.o(.constdata)
-    Rcmd1                                    0x000022ea   Data          59  periodicsystickints.o(.constdata)
-    Rcmd2green                               0x00002325   Data          13  periodicsystickints.o(.constdata)
-    Rcmd2red                                 0x00002332   Data          13  periodicsystickints.o(.constdata)
-    Rcmd3                                    0x0000233f   Data          43  periodicsystickints.o(.constdata)
-    .conststring                             0x000073ec   Section        3  periodicsystickints.o(.conststring)
-    .data                                    0x20000000   Section      196  periodicsystickints.o(.data)
+    i.Fall                                   0x00000ba0   Section        0  periodicsystickints.o(i.Fall)
+    i.Fall1                                  0x00000bd0   Section        0  periodicsystickints.o(i.Fall1)
+    i.Fall2                                  0x00000bfc   Section        0  periodicsystickints.o(i.Fall2)
+    i.Fall3                                  0x00000c2c   Section        0  periodicsystickints.o(i.Fall3)
+    i.Fall4                                  0x00000c50   Section        0  periodicsystickints.o(i.Fall4)
+    i.Fall5                                  0x00000c58   Section        0  periodicsystickints.o(i.Fall5)
+    i.GPIOArm                                0x00000c6c   Section        0  periodicsystickints.o(i.GPIOArm)
+    GPIOArm                                  0x00000c6d   Thumb Code    48  periodicsystickints.o(i.GPIOArm)
+    i.GPIOArm1                               0x00000ca8   Section        0  periodicsystickints.o(i.GPIOArm1)
+    GPIOArm1                                 0x00000ca9   Thumb Code    46  periodicsystickints.o(i.GPIOArm1)
+    i.GPIOPortC_Handler                      0x00000ce4   Section        0  periodicsystickints.o(i.GPIOPortC_Handler)
+    i.GPIOPortF_Handler                      0x00000dec   Section        0  periodicsystickints.o(i.GPIOPortF_Handler)
+    i.PC5toggle                              0x00000e84   Section        0  periodicsystickints.o(i.PC5toggle)
+    i.PLL_Init                               0x00000ec8   Section        0  pll.o(i.PLL_Init)
+    i.Rise                                   0x00000f44   Section        0  periodicsystickints.o(i.Rise)
+    i.Rise1                                  0x00000f54   Section        0  periodicsystickints.o(i.Rise1)
+    i.Rise2                                  0x00000f64   Section        0  periodicsystickints.o(i.Rise2)
+    i.Rise3                                  0x00000f74   Section        0  periodicsystickints.o(i.Rise3)
+    i.Rise4                                  0x00000f76   Section        0  periodicsystickints.o(i.Rise4)
+    i.Rise5                                  0x00000f78   Section        0  periodicsystickints.o(i.Rise5)
+    i.ST7735_DrawBitmap                      0x00000f7c   Section        0  periodicsystickints.o(i.ST7735_DrawBitmap)
+    i.ST7735_DrawCharS                       0x000010a0   Section        0  periodicsystickints.o(i.ST7735_DrawCharS)
+    i.ST7735_DrawPixel                       0x00001198   Section        0  periodicsystickints.o(i.ST7735_DrawPixel)
+    i.ST7735_DrawString                      0x000011e4   Section        0  periodicsystickints.o(i.ST7735_DrawString)
+    i.ST7735_FillRect                        0x00001238   Section        0  periodicsystickints.o(i.ST7735_FillRect)
+    i.ST7735_FillScreen                      0x000012e8   Section        0  periodicsystickints.o(i.ST7735_FillScreen)
+    i.ST7735_InitR                           0x0000130c   Section        0  periodicsystickints.o(i.ST7735_InitR)
+    i.ST7735_Line                            0x00001388   Section        0  periodicsystickints.o(i.ST7735_Line)
+    i.ST7735_OutChar                         0x00001408   Section        0  periodicsystickints.o(i.ST7735_OutChar)
+    i.ST7735_OutString                       0x000014dc   Section        0  periodicsystickints.o(i.ST7735_OutString)
+    i.ST7735_OutUDec                         0x000014f4   Section        0  periodicsystickints.o(i.ST7735_OutUDec)
+    i.ST7735_SetCursor                       0x00001580   Section        0  periodicsystickints.o(i.ST7735_SetCursor)
+    i.ST7735_SetTextColor                    0x000015a0   Section        0  periodicsystickints.o(i.ST7735_SetTextColor)
+    i.Sound_Init                             0x000015ac   Section        0  periodicsystickints.o(i.Sound_Init)
+    i.Switch_Init                            0x00001624   Section        0  periodicsystickints.o(i.Switch_Init)
+    i.SysTick_Handler                        0x00001748   Section        0  periodicsystickints.o(i.SysTick_Handler)
+    i.SysTick_Init                           0x000018c8   Section        0  systickints.o(i.SysTick_Init)
+    i.Timer0A_Handler                        0x00001908   Section        0  periodicsystickints.o(i.Timer0A_Handler)
+    i.Timer0Arm                              0x00001934   Section        0  periodicsystickints.o(i.Timer0Arm)
+    Timer0Arm                                0x00001935   Thumb Code    58  periodicsystickints.o(i.Timer0Arm)
+    i.Timer1A_Handler                        0x00001980   Section        0  periodicsystickints.o(i.Timer1A_Handler)
+    i.Timer1Arm                              0x000019c0   Section        0  periodicsystickints.o(i.Timer1Arm)
+    Timer1Arm                                0x000019c1   Thumb Code    58  periodicsystickints.o(i.Timer1Arm)
+    i.Timer2A_Handler                        0x00001a0c   Section        0  periodicsystickints.o(i.Timer2A_Handler)
+    i.Timer2_Init                            0x00001a24   Section        0  periodicsystickints.o(i.Timer2_Init)
+    i.commandList                            0x00001a84   Section        0  periodicsystickints.o(i.commandList)
+    commandList                              0x00001a85   Thumb Code    86  periodicsystickints.o(i.commandList)
+    i.commonInit                             0x00001adc   Section        0  periodicsystickints.o(i.commonInit)
+    commonInit                               0x00001add   Thumb Code   342  periodicsystickints.o(i.commonInit)
+    i.deselect                               0x00001c64   Section        0  periodicsystickints.o(i.deselect)
+    deselect                                 0x00001c65   Thumb Code    24  periodicsystickints.o(i.deselect)
+    i.fillmessage                            0x00001c80   Section        0  periodicsystickints.o(i.fillmessage)
+    i.incAlarmHour                           0x00001cc8   Section        0  periodicsystickints.o(i.incAlarmHour)
+    i.incAlarmMinute                         0x00001d24   Section        0  periodicsystickints.o(i.incAlarmMinute)
+    i.incHour                                0x00001d98   Section        0  periodicsystickints.o(i.incHour)
+    i.incMinute                              0x00001df4   Section        0  periodicsystickints.o(i.incMinute)
+    i.initLCD                                0x00001e68   Section        0  periodicsystickints.o(i.initLCD)
+    i.main                                   0x00001ee0   Section        0  periodicsystickints.o(i.main)
+    i.playAlarm                              0x00002010   Section        0  periodicsystickints.o(i.playAlarm)
+    i.plotLineX                              0x0000201c   Section        0  periodicsystickints.o(i.plotLineX)
+    i.plotLineY                              0x000020c2   Section        0  periodicsystickints.o(i.plotLineY)
+    i.pushColor                              0x00002166   Section        0  periodicsystickints.o(i.pushColor)
+    pushColor                                0x00002167   Thumb Code    18  periodicsystickints.o(i.pushColor)
+    i.setAddrWindow                          0x00002178   Section        0  periodicsystickints.o(i.setAddrWindow)
+    setAddrWindow                            0x00002179   Thumb Code   106  periodicsystickints.o(i.setAddrWindow)
+    i.toggleAlarmAmPm                        0x000021ec   Section        0  periodicsystickints.o(i.toggleAlarmAmPm)
+    i.toggleAmPm                             0x00002260   Section        0  periodicsystickints.o(i.toggleAmPm)
+    i.writecommand                           0x000022d4   Section        0  periodicsystickints.o(i.writecommand)
+    writecommand                             0x000022d5   Thumb Code    46  periodicsystickints.o(i.writecommand)
+    i.writedata                              0x0000230c   Section        0  periodicsystickints.o(i.writedata)
+    writedata                                0x0000230d   Thumb Code    26  periodicsystickints.o(i.writedata)
+    .constdata                               0x00002330   Section    22114  periodicsystickints.o(.constdata)
+    Font                                     0x00002330   Data        1275  periodicsystickints.o(.constdata)
+    Bcmd                                     0x0000282b   Data         103  periodicsystickints.o(.constdata)
+    Rcmd1                                    0x00002892   Data          59  periodicsystickints.o(.constdata)
+    Rcmd2green                               0x000028cd   Data          13  periodicsystickints.o(.constdata)
+    Rcmd2red                                 0x000028da   Data          13  periodicsystickints.o(.constdata)
+    Rcmd3                                    0x000028e7   Data          43  periodicsystickints.o(.constdata)
+    .conststring                             0x00007994   Section        3  periodicsystickints.o(.conststring)
+    .data                                    0x20000000   Section      280  periodicsystickints.o(.data)
     ColStart                                 0x2000000a   Data           1  periodicsystickints.o(.data)
     RowStart                                 0x2000000b   Data           1  periodicsystickints.o(.data)
     Rotation                                 0x2000000c   Data           1  periodicsystickints.o(.data)
@@ -546,12 +572,24 @@ Image Symbol Table
     Touch1                                   0x2000006c   Data           4  periodicsystickints.o(.data)
     Release1                                 0x20000070   Data           4  periodicsystickints.o(.data)
     Last1                                    0x20000074   Data           4  periodicsystickints.o(.data)
-    .bss                                     0x200000c4   Section       12  periodicsystickints.o(.bss)
-    .bss                                     0x200000d0   Section       96  libspace.o(.bss)
-    HEAP                                     0x20000130   Section        0  startup.o(HEAP)
-    STACK                                    0x20000130   Section     1024  startup.o(STACK)
-    HeapMem                                  0x20000130   Data           0  startup.o(HEAP)
-    StackMem                                 0x20000130   Data           0  startup.o(STACK)
+    Touch2                                   0x20000080   Data           4  periodicsystickints.o(.data)
+    Release2                                 0x20000084   Data           4  periodicsystickints.o(.data)
+    Last2                                    0x20000088   Data           4  periodicsystickints.o(.data)
+    Touch3                                   0x20000094   Data           4  periodicsystickints.o(.data)
+    Release3                                 0x20000098   Data           4  periodicsystickints.o(.data)
+    Last3                                    0x2000009c   Data           4  periodicsystickints.o(.data)
+    Touch4                                   0x200000a8   Data           4  periodicsystickints.o(.data)
+    Release4                                 0x200000ac   Data           4  periodicsystickints.o(.data)
+    Last4                                    0x200000b0   Data           4  periodicsystickints.o(.data)
+    Touch5                                   0x200000bc   Data           4  periodicsystickints.o(.data)
+    Release5                                 0x200000c0   Data           4  periodicsystickints.o(.data)
+    Last5                                    0x200000c4   Data           4  periodicsystickints.o(.data)
+    .bss                                     0x20000118   Section       12  periodicsystickints.o(.bss)
+    .bss                                     0x20000124   Section       96  libspace.o(.bss)
+    HEAP                                     0x20000188   Section        0  startup.o(HEAP)
+    STACK                                    0x20000188   Section     1024  startup.o(STACK)
+    HeapMem                                  0x20000188   Data           0  startup.o(HEAP)
+    StackMem                                 0x20000188   Data           0  startup.o(STACK)
 
     Global Symbols
 
@@ -617,7 +655,9 @@ Image Symbol Table
     Fan0_Handler                             0x00000283   Thumb Code     0  startup.o(RESET)
     FlashCtl_Handler                         0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortA_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
+    GPIOPortB_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortD_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
+    GPIOPortE_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortG_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortH_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
     GPIOPortJ_Handler                        0x00000283   Thumb Code     0  startup.o(RESET)
@@ -772,45 +812,62 @@ Image Symbol Table
     Delay1ms                                 0x000003cb   Thumb Code    32  periodicsystickints.o(i.Delay1ms)
     __semihosting_library_function           0x000003cb   Thumb Code     0  indicate_semi.o(.text)
     DrawTime                                 0x000003ed   Thumb Code  1622  periodicsystickints.o(i.DrawTime)
-    EdgeCounter_Init                         0x00000a55   Thumb Code   130  periodicsystickints.o(i.EdgeCounter_Init)
-    Fall                                     0x00000af1   Thumb Code    30  periodicsystickints.o(i.Fall)
-    GPIOPortB_Handler                        0x00000b91   Thumb Code    52  periodicsystickints.o(i.GPIOPortB_Handler)
-    GPIOPortC_Handler                        0x00000bdd   Thumb Code    86  periodicsystickints.o(i.GPIOPortC_Handler)
-    GPIOPortE_Handler                        0x00000c3d   Thumb Code    50  periodicsystickints.o(i.GPIOPortE_Handler)
-    GPIOPortF_Handler                        0x00000c79   Thumb Code    78  periodicsystickints.o(i.GPIOPortF_Handler)
-    PLL_Init                                 0x00000ce1   Thumb Code   120  pll.o(i.PLL_Init)
-    Rise                                     0x00000d5d   Thumb Code    24  periodicsystickints.o(i.Rise)
-    ST7735_DrawBitmap                        0x00000d7d   Thumb Code   284  periodicsystickints.o(i.ST7735_DrawBitmap)
-    ST7735_DrawCharS                         0x00000ea1   Thumb Code   236  periodicsystickints.o(i.ST7735_DrawCharS)
-    ST7735_DrawPixel                         0x00000f99   Thumb Code    68  periodicsystickints.o(i.ST7735_DrawPixel)
-    ST7735_DrawString                        0x00000fe5   Thumb Code    84  periodicsystickints.o(i.ST7735_DrawString)
-    ST7735_FillRect                          0x00001039   Thumb Code   168  periodicsystickints.o(i.ST7735_FillRect)
-    ST7735_FillScreen                        0x000010e9   Thumb Code    28  periodicsystickints.o(i.ST7735_FillScreen)
-    ST7735_InitR                             0x0000110d   Thumb Code    90  periodicsystickints.o(i.ST7735_InitR)
-    ST7735_Line                              0x00001189   Thumb Code   126  periodicsystickints.o(i.ST7735_Line)
-    ST7735_OutChar                           0x00001209   Thumb Code   176  periodicsystickints.o(i.ST7735_OutChar)
-    ST7735_OutString                         0x000012dd   Thumb Code    22  periodicsystickints.o(i.ST7735_OutString)
-    ST7735_OutUDec                           0x000012f5   Thumb Code   118  periodicsystickints.o(i.ST7735_OutUDec)
-    ST7735_SetCursor                         0x00001381   Thumb Code    22  periodicsystickints.o(i.ST7735_SetCursor)
-    ST7735_SetTextColor                      0x000013a1   Thumb Code     6  periodicsystickints.o(i.ST7735_SetTextColor)
-    Switch_Init                              0x000013ad   Thumb Code   218  periodicsystickints.o(i.Switch_Init)
-    SysTick_Handler                          0x000014b9   Thumb Code   334  periodicsystickints.o(i.SysTick_Handler)
-    SysTick_Init                             0x00001649   Thumb Code    58  systickints.o(i.SysTick_Init)
-    Timer0A_Handler                          0x00001689   Thumb Code    32  periodicsystickints.o(i.Timer0A_Handler)
-    Timer1A_Handler                          0x00001701   Thumb Code    44  periodicsystickints.o(i.Timer1A_Handler)
-    Timer2A_Handler                          0x00001785   Thumb Code    16  periodicsystickints.o(i.Timer2A_Handler)
-    fillmessage                              0x00001999   Thumb Code    64  periodicsystickints.o(i.fillmessage)
-    initLCD                                  0x000019e1   Thumb Code    80  periodicsystickints.o(i.initLCD)
-    main                                     0x00001a59   Thumb Code   182  periodicsystickints.o(i.main)
-    playAlarm                                0x00001b51   Thumb Code     8  periodicsystickints.o(i.playAlarm)
-    plotLineX                                0x00001b5d   Thumb Code   166  periodicsystickints.o(i.plotLineX)
-    plotLineY                                0x00001c03   Thumb Code   164  periodicsystickints.o(i.plotLineY)
-    smallCircle                              0x0000236a   Data          36  periodicsystickints.o(.constdata)
-    circle                                   0x0000238e   Data          60  periodicsystickints.o(.constdata)
-    dBfs                                     0x000023ca   Data         512  periodicsystickints.o(.constdata)
-    watchface                                0x000025ca   Data       20000  periodicsystickints.o(.constdata)
-    Region$$Table$$Base                      0x000073f0   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00007410   Number         0  anon$$obj.o(Region$$Table)
+    EdgeCounter_Init                         0x00000a55   Thumb Code   240  periodicsystickints.o(i.EdgeCounter_Init)
+    Fall                                     0x00000ba1   Thumb Code    40  periodicsystickints.o(i.Fall)
+    Fall1                                    0x00000bd1   Thumb Code    40  periodicsystickints.o(i.Fall1)
+    Fall2                                    0x00000bfd   Thumb Code    42  periodicsystickints.o(i.Fall2)
+    Fall3                                    0x00000c2d   Thumb Code    30  periodicsystickints.o(i.Fall3)
+    Fall4                                    0x00000c51   Thumb Code     8  periodicsystickints.o(i.Fall4)
+    Fall5                                    0x00000c59   Thumb Code    14  periodicsystickints.o(i.Fall5)
+    GPIOPortC_Handler                        0x00000ce5   Thumb Code   190  periodicsystickints.o(i.GPIOPortC_Handler)
+    GPIOPortF_Handler                        0x00000ded   Thumb Code   110  periodicsystickints.o(i.GPIOPortF_Handler)
+    PC5toggle                                0x00000e85   Thumb Code    54  periodicsystickints.o(i.PC5toggle)
+    PLL_Init                                 0x00000ec9   Thumb Code   120  pll.o(i.PLL_Init)
+    Rise                                     0x00000f45   Thumb Code    12  periodicsystickints.o(i.Rise)
+    Rise1                                    0x00000f55   Thumb Code    12  periodicsystickints.o(i.Rise1)
+    Rise2                                    0x00000f65   Thumb Code    12  periodicsystickints.o(i.Rise2)
+    Rise3                                    0x00000f75   Thumb Code     2  periodicsystickints.o(i.Rise3)
+    Rise4                                    0x00000f77   Thumb Code     2  periodicsystickints.o(i.Rise4)
+    Rise5                                    0x00000f79   Thumb Code     2  periodicsystickints.o(i.Rise5)
+    ST7735_DrawBitmap                        0x00000f7d   Thumb Code   284  periodicsystickints.o(i.ST7735_DrawBitmap)
+    ST7735_DrawCharS                         0x000010a1   Thumb Code   236  periodicsystickints.o(i.ST7735_DrawCharS)
+    ST7735_DrawPixel                         0x00001199   Thumb Code    68  periodicsystickints.o(i.ST7735_DrawPixel)
+    ST7735_DrawString                        0x000011e5   Thumb Code    84  periodicsystickints.o(i.ST7735_DrawString)
+    ST7735_FillRect                          0x00001239   Thumb Code   168  periodicsystickints.o(i.ST7735_FillRect)
+    ST7735_FillScreen                        0x000012e9   Thumb Code    28  periodicsystickints.o(i.ST7735_FillScreen)
+    ST7735_InitR                             0x0000130d   Thumb Code    90  periodicsystickints.o(i.ST7735_InitR)
+    ST7735_Line                              0x00001389   Thumb Code   126  periodicsystickints.o(i.ST7735_Line)
+    ST7735_OutChar                           0x00001409   Thumb Code   176  periodicsystickints.o(i.ST7735_OutChar)
+    ST7735_OutString                         0x000014dd   Thumb Code    22  periodicsystickints.o(i.ST7735_OutString)
+    ST7735_OutUDec                           0x000014f5   Thumb Code   118  periodicsystickints.o(i.ST7735_OutUDec)
+    ST7735_SetCursor                         0x00001581   Thumb Code    22  periodicsystickints.o(i.ST7735_SetCursor)
+    ST7735_SetTextColor                      0x000015a1   Thumb Code     6  periodicsystickints.o(i.ST7735_SetTextColor)
+    Sound_Init                               0x000015ad   Thumb Code   100  periodicsystickints.o(i.Sound_Init)
+    Switch_Init                              0x00001625   Thumb Code   234  periodicsystickints.o(i.Switch_Init)
+    SysTick_Handler                          0x00001749   Thumb Code   324  periodicsystickints.o(i.SysTick_Handler)
+    SysTick_Init                             0x000018c9   Thumb Code    58  systickints.o(i.SysTick_Init)
+    Timer0A_Handler                          0x00001909   Thumb Code    32  periodicsystickints.o(i.Timer0A_Handler)
+    Timer1A_Handler                          0x00001981   Thumb Code    48  periodicsystickints.o(i.Timer1A_Handler)
+    Timer2A_Handler                          0x00001a0d   Thumb Code    16  periodicsystickints.o(i.Timer2A_Handler)
+    Timer2_Init                              0x00001a25   Thumb Code    74  periodicsystickints.o(i.Timer2_Init)
+    fillmessage                              0x00001c81   Thumb Code    64  periodicsystickints.o(i.fillmessage)
+    incAlarmHour                             0x00001cc9   Thumb Code    64  periodicsystickints.o(i.incAlarmHour)
+    incAlarmMinute                           0x00001d25   Thumb Code    86  periodicsystickints.o(i.incAlarmMinute)
+    incHour                                  0x00001d99   Thumb Code    64  periodicsystickints.o(i.incHour)
+    incMinute                                0x00001df5   Thumb Code    86  periodicsystickints.o(i.incMinute)
+    initLCD                                  0x00001e69   Thumb Code    80  periodicsystickints.o(i.initLCD)
+    main                                     0x00001ee1   Thumb Code   202  periodicsystickints.o(i.main)
+    playAlarm                                0x00002011   Thumb Code     8  periodicsystickints.o(i.playAlarm)
+    plotLineX                                0x0000201d   Thumb Code   166  periodicsystickints.o(i.plotLineX)
+    plotLineY                                0x000020c3   Thumb Code   164  periodicsystickints.o(i.plotLineY)
+    toggleAlarmAmPm                          0x000021ed   Thumb Code    76  periodicsystickints.o(i.toggleAlarmAmPm)
+    toggleAmPm                               0x00002261   Thumb Code    76  periodicsystickints.o(i.toggleAmPm)
+    smallCircle                              0x00002912   Data          36  periodicsystickints.o(.constdata)
+    circle                                   0x00002936   Data          60  periodicsystickints.o(.constdata)
+    dBfs                                     0x00002972   Data         512  periodicsystickints.o(.constdata)
+    watchface                                0x00002b72   Data       20000  periodicsystickints.o(.constdata)
+    Region$$Table$$Base                      0x00007998   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000079b8   Number         0  anon$$obj.o(Region$$Table)
     StX                                      0x20000000   Data           4  periodicsystickints.o(.data)
     StY                                      0x20000004   Data           4  periodicsystickints.o(.data)
     StTextColor                              0x20000008   Data           2  periodicsystickints.o(.data)
@@ -835,27 +892,36 @@ Image Symbol Table
     ReleaseTask                              0x20000068   Data           4  periodicsystickints.o(.data)
     TouchTask1                               0x20000078   Data           4  periodicsystickints.o(.data)
     ReleaseTask1                             0x2000007c   Data           4  periodicsystickints.o(.data)
-    FallingEdges                             0x20000080   Data           4  periodicsystickints.o(.data)
-    PeriodicTask                             0x20000084   Data           4  periodicsystickints.o(.data)
-    alarmTime                                0x20000088   Data           4  periodicsystickints.o(.data)
-    alarm                                    0x2000008c   Data           2  periodicsystickints.o(.data)
-    Counts                                   0x20000090   Data           4  periodicsystickints.o(.data)
-    Hours                                    0x20000094   Data           4  periodicsystickints.o(.data)
-    Minutes                                  0x20000098   Data           4  periodicsystickints.o(.data)
-    Seconds                                  0x2000009c   Data           4  periodicsystickints.o(.data)
-    AmPm                                     0x200000a0   Data           4  periodicsystickints.o(.data)
-    Am                                       0x200000a4   Data           2  periodicsystickints.o(.data)
-    AlarmHour                                0x200000a8   Data           4  periodicsystickints.o(.data)
-    AlarmMinute                              0x200000ac   Data           4  periodicsystickints.o(.data)
-    AlarmAmPm                                0x200000b0   Data           4  periodicsystickints.o(.data)
-    AlarmSet                                 0x200000b4   Data           2  periodicsystickints.o(.data)
-    AlarmAm                                  0x200000b6   Data           2  periodicsystickints.o(.data)
-    SpeakerCount                             0x200000b8   Data           4  periodicsystickints.o(.data)
-    RiseCount                                0x200000bc   Data           4  periodicsystickints.o(.data)
-    FallCount                                0x200000c0   Data           4  periodicsystickints.o(.data)
-    Message                                  0x200000c4   Data          12  periodicsystickints.o(.bss)
-    __libspace_start                         0x200000d0   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x20000130   Data           0  libspace.o(.bss)
+    TouchTask2                               0x2000008c   Data           4  periodicsystickints.o(.data)
+    ReleaseTask2                             0x20000090   Data           4  periodicsystickints.o(.data)
+    TouchTask3                               0x200000a0   Data           4  periodicsystickints.o(.data)
+    ReleaseTask3                             0x200000a4   Data           4  periodicsystickints.o(.data)
+    TouchTask4                               0x200000b4   Data           4  periodicsystickints.o(.data)
+    ReleaseTask4                             0x200000b8   Data           4  periodicsystickints.o(.data)
+    TouchTask5                               0x200000c8   Data           4  periodicsystickints.o(.data)
+    ReleaseTask5                             0x200000cc   Data           4  periodicsystickints.o(.data)
+    FallingEdges                             0x200000d0   Data           4  periodicsystickints.o(.data)
+    PeriodicTask                             0x200000d4   Data           4  periodicsystickints.o(.data)
+    alarmTime                                0x200000d8   Data           4  periodicsystickints.o(.data)
+    alarm                                    0x200000dc   Data           2  periodicsystickints.o(.data)
+    Counts                                   0x200000e0   Data           4  periodicsystickints.o(.data)
+    Hours                                    0x200000e4   Data           4  periodicsystickints.o(.data)
+    Minutes                                  0x200000e8   Data           4  periodicsystickints.o(.data)
+    Seconds                                  0x200000ec   Data           4  periodicsystickints.o(.data)
+    AmPm                                     0x200000f0   Data           4  periodicsystickints.o(.data)
+    Am                                       0x200000f4   Data           2  periodicsystickints.o(.data)
+    AlarmHour                                0x200000f8   Data           4  periodicsystickints.o(.data)
+    AlarmMinute                              0x200000fc   Data           4  periodicsystickints.o(.data)
+    AlarmAmPm                                0x20000100   Data           4  periodicsystickints.o(.data)
+    AlarmSet                                 0x20000104   Data           2  periodicsystickints.o(.data)
+    AlarmAm                                  0x20000106   Data           2  periodicsystickints.o(.data)
+    SpeakerCount                             0x20000108   Data           4  periodicsystickints.o(.data)
+    state                                    0x2000010c   Data           4  periodicsystickints.o(.data)
+    RiseCount                                0x20000110   Data           4  periodicsystickints.o(.data)
+    FallCount                                0x20000114   Data           4  periodicsystickints.o(.data)
+    Message                                  0x20000118   Data          12  periodicsystickints.o(.bss)
+    __libspace_start                         0x20000124   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000184   Data           0  libspace.o(.bss)
 
 
 
@@ -865,141 +931,160 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x000074d4, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00007ad0, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00007410, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000079b8, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000000   0x00000284   Code   RO            3  * RESET               startup.o
-    0x00000284   0x00000284   0x00000008   Code   RO          604  * !!!main             c_w.l(__main.o)
-    0x0000028c   0x0000028c   0x00000034   Code   RO          761    !!!scatter          c_w.l(__scatter.o)
-    0x000002c0   0x000002c0   0x0000001a   Code   RO          763    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x00000284   0x00000284   0x00000008   Code   RO          652  * !!!main             c_w.l(__main.o)
+    0x0000028c   0x0000028c   0x00000034   Code   RO          809    !!!scatter          c_w.l(__scatter.o)
+    0x000002c0   0x000002c0   0x0000001a   Code   RO          811    !!handler_copy      c_w.l(__scatter_copy.o)
     0x000002da   0x000002da   0x00000002   PAD
-    0x000002dc   0x000002dc   0x0000001c   Code   RO          765    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x000002f8   0x000002f8   0x00000002   Code   RO          631    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          638    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          640    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          643    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          645    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          647    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          650    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          652    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          654    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          656    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          658    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          660    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          662    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          664    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          666    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          668    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          670    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          674    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          676    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          678    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000000   Code   RO          680    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x000002fa   0x000002fa   0x00000002   Code   RO          681    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
-    0x000002fc   0x000002fc   0x00000002   Code   RO          701    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x000002fe   0x000002fe   0x00000000   Code   RO          714    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x000002fe   0x000002fe   0x00000000   Code   RO          716    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x000002fe   0x000002fe   0x00000000   Code   RO          719    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x000002fe   0x000002fe   0x00000000   Code   RO          722    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x000002fe   0x000002fe   0x00000000   Code   RO          724    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x000002fe   0x000002fe   0x00000000   Code   RO          727    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x000002fe   0x000002fe   0x00000002   Code   RO          728    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x00000300   0x00000300   0x00000000   Code   RO          606    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x00000300   0x00000300   0x00000000   Code   RO          608    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x00000300   0x00000300   0x00000006   Code   RO          620    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x00000306   0x00000306   0x00000000   Code   RO          610    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x00000306   0x00000306   0x00000004   Code   RO          611    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x0000030a   0x0000030a   0x00000000   Code   RO          613    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x0000030a   0x0000030a   0x00000008   Code   RO          614    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x00000312   0x00000312   0x00000002   Code   RO          635    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x00000314   0x00000314   0x00000000   Code   RO          683    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x00000314   0x00000314   0x00000004   Code   RO          684    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x00000318   0x00000318   0x00000006   Code   RO          685    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x000002dc   0x000002dc   0x0000001c   Code   RO          813    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x000002f8   0x000002f8   0x00000002   Code   RO          679    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          686    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          688    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          691    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          693    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          695    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          698    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          700    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          702    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          704    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          706    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          708    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          710    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          712    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          714    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          716    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          718    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          722    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          724    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          726    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000000   Code   RO          728    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x000002fa   0x000002fa   0x00000002   Code   RO          729    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x000002fc   0x000002fc   0x00000002   Code   RO          749    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x000002fe   0x000002fe   0x00000000   Code   RO          762    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x000002fe   0x000002fe   0x00000000   Code   RO          764    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x000002fe   0x000002fe   0x00000000   Code   RO          767    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x000002fe   0x000002fe   0x00000000   Code   RO          770    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x000002fe   0x000002fe   0x00000000   Code   RO          772    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x000002fe   0x000002fe   0x00000000   Code   RO          775    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x000002fe   0x000002fe   0x00000002   Code   RO          776    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x00000300   0x00000300   0x00000000   Code   RO          654    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x00000300   0x00000300   0x00000000   Code   RO          656    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x00000300   0x00000300   0x00000006   Code   RO          668    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x00000306   0x00000306   0x00000000   Code   RO          658    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x00000306   0x00000306   0x00000004   Code   RO          659    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x0000030a   0x0000030a   0x00000000   Code   RO          661    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x0000030a   0x0000030a   0x00000008   Code   RO          662    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x00000312   0x00000312   0x00000002   Code   RO          683    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x00000314   0x00000314   0x00000000   Code   RO          731    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x00000314   0x00000314   0x00000004   Code   RO          732    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000318   0x00000318   0x00000006   Code   RO          733    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000031e   0x0000031e   0x00000002   PAD
     0x00000320   0x00000320   0x00000030   Code   RO            4    .text               startup.o
-    0x00000350   0x00000350   0x00000006   Code   RO          602    .text               c_w.l(heapauxi.o)
-    0x00000356   0x00000356   0x0000004a   Code   RO          622    .text               c_w.l(sys_stackheap_outer.o)
-    0x000003a0   0x000003a0   0x00000012   Code   RO          624    .text               c_w.l(exit.o)
+    0x00000350   0x00000350   0x00000006   Code   RO          650    .text               c_w.l(heapauxi.o)
+    0x00000356   0x00000356   0x0000004a   Code   RO          670    .text               c_w.l(sys_stackheap_outer.o)
+    0x000003a0   0x000003a0   0x00000012   Code   RO          672    .text               c_w.l(exit.o)
     0x000003b2   0x000003b2   0x00000002   PAD
-    0x000003b4   0x000003b4   0x00000008   Code   RO          632    .text               c_w.l(libspace.o)
-    0x000003bc   0x000003bc   0x0000000c   Code   RO          693    .text               c_w.l(sys_exit.o)
-    0x000003c8   0x000003c8   0x00000002   Code   RO          704    .text               c_w.l(use_no_semi.o)
-    0x000003ca   0x000003ca   0x00000000   Code   RO          706    .text               c_w.l(indicate_semi.o)
+    0x000003b4   0x000003b4   0x00000008   Code   RO          680    .text               c_w.l(libspace.o)
+    0x000003bc   0x000003bc   0x0000000c   Code   RO          741    .text               c_w.l(sys_exit.o)
+    0x000003c8   0x000003c8   0x00000002   Code   RO          752    .text               c_w.l(use_no_semi.o)
+    0x000003ca   0x000003ca   0x00000000   Code   RO          754    .text               c_w.l(indicate_semi.o)
     0x000003ca   0x000003ca   0x00000020   Code   RO           12    i.Delay1ms          periodicsystickints.o
     0x000003ea   0x000003ea   0x00000002   PAD
     0x000003ec   0x000003ec   0x00000668   Code   RO           13    i.DrawTime          periodicsystickints.o
-    0x00000a54   0x00000a54   0x0000009c   Code   RO           14    i.EdgeCounter_Init  periodicsystickints.o
-    0x00000af0   0x00000af0   0x00000028   Code   RO           15    i.Fall              periodicsystickints.o
-    0x00000b18   0x00000b18   0x0000003c   Code   RO           16    i.GPIOArm           periodicsystickints.o
-    0x00000b54   0x00000b54   0x0000003c   Code   RO           17    i.GPIOArm1          periodicsystickints.o
-    0x00000b90   0x00000b90   0x0000004c   Code   RO           18    i.GPIOPortB_Handler  periodicsystickints.o
-    0x00000bdc   0x00000bdc   0x00000060   Code   RO           19    i.GPIOPortC_Handler  periodicsystickints.o
-    0x00000c3c   0x00000c3c   0x0000003c   Code   RO           20    i.GPIOPortE_Handler  periodicsystickints.o
-    0x00000c78   0x00000c78   0x00000068   Code   RO           21    i.GPIOPortF_Handler  periodicsystickints.o
-    0x00000ce0   0x00000ce0   0x0000007c   Code   RO          567    i.PLL_Init          pll.o
-    0x00000d5c   0x00000d5c   0x00000020   Code   RO           28    i.Rise              periodicsystickints.o
-    0x00000d7c   0x00000d7c   0x00000124   Code   RO           30    i.ST7735_DrawBitmap  periodicsystickints.o
-    0x00000ea0   0x00000ea0   0x000000f8   Code   RO           32    i.ST7735_DrawCharS  periodicsystickints.o
-    0x00000f98   0x00000f98   0x0000004c   Code   RO           36    i.ST7735_DrawPixel  periodicsystickints.o
-    0x00000fe4   0x00000fe4   0x00000054   Code   RO           38    i.ST7735_DrawString  periodicsystickints.o
-    0x00001038   0x00001038   0x000000b0   Code   RO           39    i.ST7735_FillRect   periodicsystickints.o
-    0x000010e8   0x000010e8   0x00000024   Code   RO           40    i.ST7735_FillScreen  periodicsystickints.o
-    0x0000110c   0x0000110c   0x0000007c   Code   RO           42    i.ST7735_InitR      periodicsystickints.o
-    0x00001188   0x00001188   0x0000007e   Code   RO           44    i.ST7735_Line       periodicsystickints.o
-    0x00001206   0x00001206   0x00000002   PAD
-    0x00001208   0x00001208   0x000000d4   Code   RO           45    i.ST7735_OutChar    periodicsystickints.o
-    0x000012dc   0x000012dc   0x00000016   Code   RO           46    i.ST7735_OutString  periodicsystickints.o
-    0x000012f2   0x000012f2   0x00000002   PAD
-    0x000012f4   0x000012f4   0x0000008c   Code   RO           47    i.ST7735_OutUDec    periodicsystickints.o
-    0x00001380   0x00001380   0x00000020   Code   RO           56    i.ST7735_SetCursor  periodicsystickints.o
-    0x000013a0   0x000013a0   0x0000000c   Code   RO           58    i.ST7735_SetTextColor  periodicsystickints.o
-    0x000013ac   0x000013ac   0x0000010c   Code   RO           63    i.Switch_Init       periodicsystickints.o
-    0x000014b8   0x000014b8   0x00000190   Code   RO           68    i.SysTick_Handler   periodicsystickints.o
-    0x00001648   0x00001648   0x00000040   Code   RO          585    i.SysTick_Init      systickints.o
-    0x00001688   0x00001688   0x0000002c   Code   RO           69    i.Timer0A_Handler   periodicsystickints.o
-    0x000016b4   0x000016b4   0x0000004c   Code   RO           70    i.Timer0Arm         periodicsystickints.o
-    0x00001700   0x00001700   0x00000038   Code   RO           71    i.Timer1A_Handler   periodicsystickints.o
-    0x00001738   0x00001738   0x0000004c   Code   RO           72    i.Timer1Arm         periodicsystickints.o
-    0x00001784   0x00001784   0x00000018   Code   RO           73    i.Timer2A_Handler   periodicsystickints.o
-    0x0000179c   0x0000179c   0x00000056   Code   RO           75    i.commandList       periodicsystickints.o
-    0x000017f2   0x000017f2   0x00000002   PAD
-    0x000017f4   0x000017f4   0x00000188   Code   RO           76    i.commonInit        periodicsystickints.o
-    0x0000197c   0x0000197c   0x0000001c   Code   RO           77    i.deselect          periodicsystickints.o
-    0x00001998   0x00001998   0x00000048   Code   RO           80    i.fillmessage       periodicsystickints.o
-    0x000019e0   0x000019e0   0x00000078   Code   RO           86    i.initLCD           periodicsystickints.o
-    0x00001a58   0x00001a58   0x000000f8   Code   RO           87    i.main              periodicsystickints.o
-    0x00001b50   0x00001b50   0x0000000c   Code   RO           88    i.playAlarm         periodicsystickints.o
-    0x00001b5c   0x00001b5c   0x000000a6   Code   RO           89    i.plotLineX         periodicsystickints.o
-    0x00001c02   0x00001c02   0x000000a4   Code   RO           90    i.plotLineY         periodicsystickints.o
-    0x00001ca6   0x00001ca6   0x00000012   Code   RO           91    i.pushColor         periodicsystickints.o
-    0x00001cb8   0x00001cb8   0x00000074   Code   RO           92    i.setAddrWindow     periodicsystickints.o
-    0x00001d2c   0x00001d2c   0x00000038   Code   RO           96    i.writecommand      periodicsystickints.o
-    0x00001d64   0x00001d64   0x00000024   Code   RO           97    i.writedata         periodicsystickints.o
-    0x00001d88   0x00001d88   0x00005662   Data   RO           99    .constdata          periodicsystickints.o
-    0x000073ea   0x000073ea   0x00000002   PAD
-    0x000073ec   0x000073ec   0x00000003   Data   RO          100    .conststring        periodicsystickints.o
-    0x000073ef   0x000073ef   0x00000001   PAD
-    0x000073f0   0x000073f0   0x00000020   Data   RO          759    Region$$Table       anon$$obj.o
+    0x00000a54   0x00000a54   0x0000014c   Code   RO           14    i.EdgeCounter_Init  periodicsystickints.o
+    0x00000ba0   0x00000ba0   0x00000030   Code   RO           15    i.Fall              periodicsystickints.o
+    0x00000bd0   0x00000bd0   0x0000002c   Code   RO           16    i.Fall1             periodicsystickints.o
+    0x00000bfc   0x00000bfc   0x00000030   Code   RO           17    i.Fall2             periodicsystickints.o
+    0x00000c2c   0x00000c2c   0x00000024   Code   RO           18    i.Fall3             periodicsystickints.o
+    0x00000c50   0x00000c50   0x00000008   Code   RO           19    i.Fall4             periodicsystickints.o
+    0x00000c58   0x00000c58   0x00000014   Code   RO           20    i.Fall5             periodicsystickints.o
+    0x00000c6c   0x00000c6c   0x0000003c   Code   RO           21    i.GPIOArm           periodicsystickints.o
+    0x00000ca8   0x00000ca8   0x0000003c   Code   RO           22    i.GPIOArm1          periodicsystickints.o
+    0x00000ce4   0x00000ce4   0x00000108   Code   RO           23    i.GPIOPortC_Handler  periodicsystickints.o
+    0x00000dec   0x00000dec   0x00000098   Code   RO           24    i.GPIOPortF_Handler  periodicsystickints.o
+    0x00000e84   0x00000e84   0x00000044   Code   RO           30    i.PC5toggle         periodicsystickints.o
+    0x00000ec8   0x00000ec8   0x0000007c   Code   RO          615    i.PLL_Init          pll.o
+    0x00000f44   0x00000f44   0x00000010   Code   RO           31    i.Rise              periodicsystickints.o
+    0x00000f54   0x00000f54   0x00000010   Code   RO           32    i.Rise1             periodicsystickints.o
+    0x00000f64   0x00000f64   0x00000010   Code   RO           33    i.Rise2             periodicsystickints.o
+    0x00000f74   0x00000f74   0x00000002   Code   RO           34    i.Rise3             periodicsystickints.o
+    0x00000f76   0x00000f76   0x00000002   Code   RO           35    i.Rise4             periodicsystickints.o
+    0x00000f78   0x00000f78   0x00000002   Code   RO           36    i.Rise5             periodicsystickints.o
+    0x00000f7a   0x00000f7a   0x00000002   PAD
+    0x00000f7c   0x00000f7c   0x00000124   Code   RO           38    i.ST7735_DrawBitmap  periodicsystickints.o
+    0x000010a0   0x000010a0   0x000000f8   Code   RO           40    i.ST7735_DrawCharS  periodicsystickints.o
+    0x00001198   0x00001198   0x0000004c   Code   RO           44    i.ST7735_DrawPixel  periodicsystickints.o
+    0x000011e4   0x000011e4   0x00000054   Code   RO           46    i.ST7735_DrawString  periodicsystickints.o
+    0x00001238   0x00001238   0x000000b0   Code   RO           47    i.ST7735_FillRect   periodicsystickints.o
+    0x000012e8   0x000012e8   0x00000024   Code   RO           48    i.ST7735_FillScreen  periodicsystickints.o
+    0x0000130c   0x0000130c   0x0000007c   Code   RO           50    i.ST7735_InitR      periodicsystickints.o
+    0x00001388   0x00001388   0x0000007e   Code   RO           52    i.ST7735_Line       periodicsystickints.o
+    0x00001406   0x00001406   0x00000002   PAD
+    0x00001408   0x00001408   0x000000d4   Code   RO           53    i.ST7735_OutChar    periodicsystickints.o
+    0x000014dc   0x000014dc   0x00000016   Code   RO           54    i.ST7735_OutString  periodicsystickints.o
+    0x000014f2   0x000014f2   0x00000002   PAD
+    0x000014f4   0x000014f4   0x0000008c   Code   RO           55    i.ST7735_OutUDec    periodicsystickints.o
+    0x00001580   0x00001580   0x00000020   Code   RO           64    i.ST7735_SetCursor  periodicsystickints.o
+    0x000015a0   0x000015a0   0x0000000c   Code   RO           66    i.ST7735_SetTextColor  periodicsystickints.o
+    0x000015ac   0x000015ac   0x00000078   Code   RO           70    i.Sound_Init        periodicsystickints.o
+    0x00001624   0x00001624   0x00000124   Code   RO           71    i.Switch_Init       periodicsystickints.o
+    0x00001748   0x00001748   0x00000180   Code   RO           75    i.SysTick_Handler   periodicsystickints.o
+    0x000018c8   0x000018c8   0x00000040   Code   RO          633    i.SysTick_Init      systickints.o
+    0x00001908   0x00001908   0x0000002c   Code   RO           76    i.Timer0A_Handler   periodicsystickints.o
+    0x00001934   0x00001934   0x0000004c   Code   RO           77    i.Timer0Arm         periodicsystickints.o
+    0x00001980   0x00001980   0x00000040   Code   RO           78    i.Timer1A_Handler   periodicsystickints.o
+    0x000019c0   0x000019c0   0x0000004c   Code   RO           79    i.Timer1Arm         periodicsystickints.o
+    0x00001a0c   0x00001a0c   0x00000018   Code   RO           80    i.Timer2A_Handler   periodicsystickints.o
+    0x00001a24   0x00001a24   0x00000060   Code   RO           81    i.Timer2_Init       periodicsystickints.o
+    0x00001a84   0x00001a84   0x00000056   Code   RO           82    i.commandList       periodicsystickints.o
+    0x00001ada   0x00001ada   0x00000002   PAD
+    0x00001adc   0x00001adc   0x00000188   Code   RO           83    i.commonInit        periodicsystickints.o
+    0x00001c64   0x00001c64   0x0000001c   Code   RO           84    i.deselect          periodicsystickints.o
+    0x00001c80   0x00001c80   0x00000048   Code   RO           87    i.fillmessage       periodicsystickints.o
+    0x00001cc8   0x00001cc8   0x0000005c   Code   RO           89    i.incAlarmHour      periodicsystickints.o
+    0x00001d24   0x00001d24   0x00000074   Code   RO           90    i.incAlarmMinute    periodicsystickints.o
+    0x00001d98   0x00001d98   0x0000005c   Code   RO           91    i.incHour           periodicsystickints.o
+    0x00001df4   0x00001df4   0x00000074   Code   RO           92    i.incMinute         periodicsystickints.o
+    0x00001e68   0x00001e68   0x00000078   Code   RO           93    i.initLCD           periodicsystickints.o
+    0x00001ee0   0x00001ee0   0x00000130   Code   RO           94    i.main              periodicsystickints.o
+    0x00002010   0x00002010   0x0000000c   Code   RO           95    i.playAlarm         periodicsystickints.o
+    0x0000201c   0x0000201c   0x000000a6   Code   RO           96    i.plotLineX         periodicsystickints.o
+    0x000020c2   0x000020c2   0x000000a4   Code   RO           97    i.plotLineY         periodicsystickints.o
+    0x00002166   0x00002166   0x00000012   Code   RO           98    i.pushColor         periodicsystickints.o
+    0x00002178   0x00002178   0x00000074   Code   RO           99    i.setAddrWindow     periodicsystickints.o
+    0x000021ec   0x000021ec   0x00000074   Code   RO          101    i.toggleAlarmAmPm   periodicsystickints.o
+    0x00002260   0x00002260   0x00000074   Code   RO          102    i.toggleAmPm        periodicsystickints.o
+    0x000022d4   0x000022d4   0x00000038   Code   RO          103    i.writecommand      periodicsystickints.o
+    0x0000230c   0x0000230c   0x00000024   Code   RO          104    i.writedata         periodicsystickints.o
+    0x00002330   0x00002330   0x00005662   Data   RO          106    .constdata          periodicsystickints.o
+    0x00007992   0x00007992   0x00000002   PAD
+    0x00007994   0x00007994   0x00000003   Data   RO          107    .conststring        periodicsystickints.o
+    0x00007997   0x00007997   0x00000001   PAD
+    0x00007998   0x00007998   0x00000020   Data   RO          807    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00007410, Size: 0x000000c4, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x000079b8, Size: 0x00000118, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00007410   0x000000c4   Data   RW          101    .data               periodicsystickints.o
+    0x20000000   0x000079b8   0x00000118   Data   RW          108    .data               periodicsystickints.o
 
 
-    Execution Region ER_ZI (Exec base: 0x200000c4, Load base: 0x000074d4, Size: 0x0000046c, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000118, Load base: 0x00007ad0, Size: 0x00000470, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x200000c4        -       0x0000000c   Zero   RW           98    .bss                periodicsystickints.o
-    0x200000d0        -       0x00000060   Zero   RW          633    .bss                c_w.l(libspace.o)
-    0x20000130        -       0x00000000   Zero   RW            2    HEAP                startup.o
-    0x20000130        -       0x00000400   Zero   RW            1    STACK               startup.o
+    0x20000118        -       0x0000000c   Zero   RW          105    .bss                periodicsystickints.o
+    0x20000124        -       0x00000060   Zero   RW          681    .bss                c_w.l(libspace.o)
+    0x20000184   0x00007ad0   0x00000004   PAD
+    0x20000188        -       0x00000000   Zero   RW            2    HEAP                startup.o
+    0x20000188        -       0x00000400   Zero   RW            1    STACK               startup.o
 
 
 ==============================================================================
@@ -1009,15 +1094,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      6394        820      22117        196         12      37542   periodicsystickints.o
-       124          4          0          0          0        467   pll.o
-       692        632          0          0       1024        988   startup.o
-        64          6          0          0          0        531   systickints.o
+      7840       1250      22117        280         12      48244   periodicsystickints.o
+       124          4          0          0          0        479   pll.o
+       692        632          0          0       1024       1012   startup.o
+        64          6          0          0          0        543   systickints.o
 
     ----------------------------------------------------------------------
-      7282       1462      22152        196       1036      39528   Object Totals
+      8730       1892      22152        280       1036      50278   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         8          0          3          0          0          0   (incl. Padding)
+        10          0          3          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1045,8 +1130,8 @@ Image component sizes
          2          0          0          0          0         68   use_no_semi.o
 
     ----------------------------------------------------------------------
-       278         16          0          0         96        584   Library Totals
-         6          0          0          0          0          0   (incl. Padding)
+       278         16          0          0        100        584   Library Totals
+         6          0          0          0          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1055,7 +1140,7 @@ Image component sizes
        272         16          0          0         96        584   c_w.l
 
     ----------------------------------------------------------------------
-       278         16          0          0         96        584   Library Totals
+       278         16          0          0        100        584   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -1064,15 +1149,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7560       1478      22152        196       1132      37768   Grand Totals
-      7560       1478      22152        196       1132      37768   ELF Image Totals
-      7560       1478      22152        196          0          0   ROM Totals
+      9008       1908      22152        280       1136      47686   Grand Totals
+      9008       1908      22152        280       1136      47686   ELF Image Totals
+      9008       1908      22152        280          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                29712 (  29.02kB)
-    Total RW  Size (RW Data + ZI Data)              1328 (   1.30kB)
-    Total ROM Size (Code + RO Data + RW Data)      29908 (  29.21kB)
+    Total RO  Size (Code + RO Data)                31160 (  30.43kB)
+    Total RW  Size (RW Data + ZI Data)              1416 (   1.38kB)
+    Total ROM Size (Code + RO Data + RW Data)      31440 (  30.70kB)
 
 ==============================================================================
 
