@@ -37,6 +37,8 @@
 #include "LCDDriver.h"
 #include "SwitchDriver.h"
 #include "SoundDriver.h"
+//#include "Systick.c"
+//#include "Systick.h"
 
 #define PB0 (*((volatile uint32_t *)0x40005004))
 
@@ -154,17 +156,15 @@ void Rise(void){
 void Fall(void){
   
   FallCount++;
-	switch(state){
+
 		
-	case 0x00: {
+	if(state ==0 ) {
 		incHour();
-		break;
 	}
-	case 0x01: {
+	else if (state ==1) {
 		incAlarmHour();
-		break;
 	}
-	}
+	
 	
 	
 }
@@ -173,19 +173,16 @@ void Rise1(void){
   RiseCount++;
 }
 void Fall1(void){
-  switch(state){
-		
-	case 0x00: {
-		incMinute();
-		break;
-	}
-	case 0x01: {
-		incAlarmMinute();
-		break;
-	}
-	default: state = state;
 
+		
+	if(state == 0){
+		incMinute();
 	}
+	else if (state ==1){
+		incAlarmMinute();
+	}
+
+	
 }
 
 void Rise2(void){
@@ -194,49 +191,54 @@ void Rise2(void){
 	
 }
 void Fall2(void){
-  switch(state){
+
 		
-	case 0x00: {
+	if(state ==0) {
 		state = 1;
-		break;
+		
 	}
-	case 0x01: {
+	else if(state == 1) {
 		state = 0;
-		break;
+		
 	}
-	default: state = state;
-	}
+	
 }
 
 void Rise3(void){
   
 }
 void Fall3(void){
-  switch(state){
+  
 		
-	case 0x00: {
+	if(state ==0){
 		toggleAmPm();
-		break;
 	}
-	case 0x01: {
+	else if(state ==1){
 		toggleAlarmAmPm();
-		break;
 	}
-	}
+	
 	
 }
 void Rise4(void){
   
 }
+
 void Fall4(void){
-  playAlarm();
+	playAlarm();
+			AlarmSet = 1;
+	PF1 ^= 1;
+			
+			
+
+  
 	
 }
 void Rise5(void){
  
 }
 void Fall5(void){
-  PF2 ^= 0x04;
+  		playAlarm();
+
  
 	
 }
@@ -283,9 +285,11 @@ int main(void){
 }
 
 
+
 // Interrupt service routine
 // Executed every 12.5ns*(period)
 void SysTick_Handler(void){
+
   //PF2 ^= 0x04;                // toggle PF2
   //PF2 ^= 0x04;                // toggle PF2
   Counts = Counts + 1;
@@ -299,9 +303,16 @@ void SysTick_Handler(void){
 	
 
 	if(Counts == 1000){
-		PF2 ^= 0x04;                // toggle PF2
 		Counts = 0;
 		Seconds++;
+		PF2 ^= 0X04;
+		
+		DrawTime(Hours, Minutes, (char*) AmPm, AlarmSet, AlarmHour, AlarmMinute, (char*) AlarmAmPm);
+		PF2 ^= 0X04;
+		PF2 ^= 0X04;
+		PF3 ^= 0X08;
+
+
 	}
 	if( Seconds >= 60){
 		Seconds = 0;
@@ -335,10 +346,5 @@ void SysTick_Handler(void){
 	
 
 }
-
-
-
-
-
 
 

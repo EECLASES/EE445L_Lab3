@@ -1,6 +1,6 @@
 Dependencies for Project 'PeriodicSysTickInts', Target 'PeriodicSysTickInts': (DO NOT MODIFY !)
 F (.\startup.s)(0x5D70274C)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
-F (.\PeriodicSysTickInts.c)(0x5D8D32CD)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .. -I ..\..\.. --C99-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_LM4F120H5QR-o .\periodicsystickints.o --omf_browse .\periodicsystickints.crf --depend .\periodicsystickints.d)
+F (.\PeriodicSysTickInts.c)(0x5D920E93)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .. -I ..\..\.. --C99-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_LM4F120H5QR-o .\periodicsystickints.o --omf_browse .\periodicsystickints.crf --depend .\periodicsystickints.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599FA01E)
 I (../inc/tm4c123gh6pm.h)(0x5D70273E)
 I (../inc/SysTickInts.h)(0x5D8A9E8E)
@@ -8,19 +8,17 @@ I (../inc/PLL.h)(0x5D70273D)
 I (ST7735.c)(0x5D88F764)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599FA01C)
 I (../inc/ST7735.h)(0x5D88F786)
-I (LCDDriver.c)(0x5D8B996A)
+I (LCDDriver.c)(0x5D8EB564)
 I (SwitchDriver.c)(0x5D8D3460)
 I (SwitchDriver.h)(0x5D8D34C2)
-I (SoundDriver.c)(0x5D8D3560)
+I (SoundDriver.c)(0x5D8D3877)
 I (../inc/Timer2A.h)(0x5D8BC057)
 I (../inc/Timer2A.c)(0x5D8BC0B9)
 I (SoundDriver.h)(0x5D8D350F)
-I (LCDDriver.h)(0x5D8D35CA)
+I (LCDDriver.h)(0x5D8D36B3)
 F (..\inc\PLL.c)(0x5D70273D)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .. -I ..\..\.. --C99-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_LM4F120H5QR-o .\pll.o --omf_browse .\pll.crf --depend .\pll.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599FA01E)
 I (..\inc\../inc/PLL.h)(0x5D70273D)
 I (..\inc\../inc/tm4c123gh6pm.h)(0x5D70273E)
-F (..\inc\SysTickInts.c)(0x5D8A9AF4)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .. -I ..\..\.. --C99-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_LM4F120H5QR-o .\systickints.o --omf_browse .\systickints.crf --depend .\systickints.d)
+F (..\inc\SysTickInts.c)(0x5D920CCF)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections -I .. -I ..\..\.. --C99-I.\RTE\_PeriodicSysTickInts-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="526" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_LM4F120H5QR-o .\systickints.o --omf_browse .\systickints.crf --depend .\systickints.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599FA01E)
-I (..\inc\../inc/tm4c123gh6pm.h)(0x5D70273E)
-I (..\inc\SysTickInts.h)(0x5D8A9E8E)

@@ -2,6 +2,10 @@
 #include <stdint.h>
 #include "../inc/tm4c123gh6pm.h"
 
+
+#define PF2       (*((volatile uint32_t *)0x40025010))
+
+
 volatile uint32_t HrX1, HrX2, HrY1, HrY2, MinX1, MinX2, MinY1, MinY2;
 volatile uint16_t setting;
 
@@ -669,7 +673,7 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin, char* AmPm, uint32_t alar
 	ST7735_OutUDec(currentMin);
 	ST7735_OutString(AmPm);
 	if(alarmSet == 1){
-		ST7735_OutString("      ");
+		ST7735_OutString("     ");
 		ST7735_SetTextColor(ST7735_BLUE);
 		if(alarmHr < 10){
 			ST7735_OutString(" ");
@@ -993,5 +997,4 @@ void DrawTime(uint32_t currentHr, uint32_t currentMin, char* AmPm, uint32_t alar
 	
 	ST7735_Line(MinX1, MinY1, MinX2, MinY2, 0x0000);
 	
-
 }

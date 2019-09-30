@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\PeriodicSysTickInts.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\PeriodicSysTickInts.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Sep 26 17:04:09 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Sep 27 16:23:12 2019
 <BR><P>
 <H3>Maximum Stack Usage =        224 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -804,7 +804,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[83]"></a>Fall</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, periodicsystickints.o(i.Fall))
+<P><STRONG><a name="[83]"></a>Fall</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, periodicsystickints.o(i.Fall))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = Fall &rArr; incHour &rArr; DrawTime &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;incHour
@@ -812,7 +812,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> periodicsystickints.o(i.main)
 </UL>
-<P><STRONG><a name="[81]"></a>Fall1</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, periodicsystickints.o(i.Fall1))
+<P><STRONG><a name="[81]"></a>Fall1</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, periodicsystickints.o(i.Fall1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = Fall1 &rArr; incMinute &rArr; DrawTime &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;incMinute
@@ -820,10 +820,10 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> periodicsystickints.o(i.main)
 </UL>
-<P><STRONG><a name="[8b]"></a>Fall2</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, periodicsystickints.o(i.Fall2))
+<P><STRONG><a name="[8b]"></a>Fall2</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, periodicsystickints.o(i.Fall2))
 <BR>[Address Reference Count : 1]<UL><LI> periodicsystickints.o(i.main)
 </UL>
-<P><STRONG><a name="[89]"></a>Fall3</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, periodicsystickints.o(i.Fall3))
+<P><STRONG><a name="[89]"></a>Fall3</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, periodicsystickints.o(i.Fall3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = Fall3 &rArr; toggleAmPm &rArr; DrawTime &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;toggleAmPm
@@ -831,14 +831,18 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> periodicsystickints.o(i.main)
 </UL>
-<P><STRONG><a name="[87]"></a>Fall4</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, periodicsystickints.o(i.Fall4))
+<P><STRONG><a name="[87]"></a>Fall4</STRONG> (Thumb, 26 bytes, Stack size 4 bytes, periodicsystickints.o(i.Fall4))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Fall4
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;playAlarm
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> periodicsystickints.o(i.main)
 </UL>
-<P><STRONG><a name="[85]"></a>Fall5</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, periodicsystickints.o(i.Fall5))
+<P><STRONG><a name="[85]"></a>Fall5</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, periodicsystickints.o(i.Fall5))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = Fall5
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;playAlarm
+</UL>
 <BR>[Address Reference Count : 1]<UL><LI> periodicsystickints.o(i.main)
 </UL>
 <P><STRONG><a name="[f]"></a>GPIOPortC_Handler</STRONG> (Thumb, 190 bytes, Stack size 8 bytes, periodicsystickints.o(i.GPIOPortC_Handler))
@@ -1016,7 +1020,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 324 bytes, Stack size 16 bytes, periodicsystickints.o(i.SysTick_Handler))
+<P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 394 bytes, Stack size 16 bytes, periodicsystickints.o(i.SysTick_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = SysTick_Handler &rArr; DrawTime &rArr; ST7735_OutString &rArr; ST7735_OutChar &rArr; ST7735_DrawString &rArr; ST7735_DrawCharS &rArr; ST7735_FillRect &rArr; setAddrWindow
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;playAlarm
@@ -1127,6 +1131,7 @@ Global Symbols
 
 <P><STRONG><a name="[ae]"></a>playAlarm</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, periodicsystickints.o(i.playAlarm))
 <BR><BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Fall5
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Fall4
 </UL>
 
